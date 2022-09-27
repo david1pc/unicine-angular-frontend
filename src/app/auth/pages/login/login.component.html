@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<section class="section-login">
+  <div class="login">
+    <div class="header-login">
+      <img src="assets/img/logo.png" alt="" class="header-login-logo" />
+      <h2 class="header-title">Inicia sesión con tu cuenta</h2>
+    </div>
+    <form class="form">
+      <input
+        type="text"
+        name="correo"
+        class="form-input"
+        placeholder="Correo electrónico"
+      />
+      <input
+        type="password"
+        name="password"
+        class="form-input"
+        placeholder="Contraseña"
+      />
+      <button class="form-btn">Iniciar sesión</button>
+    </form>
+    <div class="form-footer">
+      <p class="form-footer-p">
+        o <a routerLink="/auth/recuperacion">¿Has olvidado la contraseña?</a>
+      </p>
+      <p class="form-footer-p">
+        ¿No tienes una cuenta en UniCine?
+        <a routerLink="/auth/registro">Crear una cuenta</a>
+      </p>
+    </div>
+  </div>
+</section>

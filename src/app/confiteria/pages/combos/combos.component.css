@@ -1,0 +1,17 @@
+.container {
+  max-width: 130rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.4rem;
+  padding-left: 2.4rem;
+}
+
+.container-crispetas {
+  display: flex;
+  gap: 3em;
+}
+
+.crispetas-title {
+  margin-top: 3.2rem;
+  font-size: 2rem;
+}

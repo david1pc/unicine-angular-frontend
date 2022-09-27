@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<app-breadcrumb></app-breadcrumb>
+<div class="container">
+  <h2 class="confiteria-title">Confiteria</h2>
+  <div class="confiteria-items">
+    <app-confiteria-card
+      [imgUrl]="crispetasUrl"
+      [titulo]="'Crispetas'"
+      [ruta]="'/confiteria/crispetas'"
+    ></app-confiteria-card>
+    <app-confiteria-card
+      [imgUrl]="combosUrl"
+      [titulo]="'Combos'"
+      [ruta]="'/confiteria/combos'"
+    ></app-confiteria-card>
+  </div>
+</div>

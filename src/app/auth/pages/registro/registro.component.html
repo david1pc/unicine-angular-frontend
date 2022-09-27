@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<section class="section-registro">
+  <div class="header-registro">
+    <h2 class="header-registro-title">Registro de nuevo usuario</h2>
+  </div>
+  <form class="form">
+    <input type="text" placeholder="Cedula" class="form-input" />
+    <input type="text" placeholder="Primer nombre" class="form-input" />
+    <input type="text" placeholder="Segundo nombre" class="form-input" />
+    <input type="text" placeholder="Primer apellido" class="form-input" />
+    <input type="text" placeholder="Segundo apellido" class="form-input" />
+    <div class="form-telefonos">
+      <input type="text" placeholder="Telefonos" class="form-input" />
+      <button class="form-btn-telefono">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="telefono-btn"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+    </div>
+    <input type="text" class="form-input" placeholder="Correo electrónico" />
+    <div class="form-perfil">
+      <label for="img" class="form-perfil-label"
+        >Seleccionar imagen de perfil</label
+      >
+      <input type="file" name="" id="img" />
+    </div>
+    <input type="password" class="form-input" placeholder="Contraseña" />
+    <p class="info">
+      Al registrarte, aceptas nuestras Condiciones de uso y nuestra Política de
+      privacidad.
+    </p>
+    <button class="form-btn">Registrarse</button>
+  </form>
+</section>

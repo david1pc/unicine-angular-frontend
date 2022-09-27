@@ -1,0 +1,34 @@
+<!-- <div class="card">
+  <div class="card-header">
+    <img src="assets/img/poster.jpg" alt="" class="card-header-poster" />
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">Titulo: Dragon ball Super: Super Hero</h3>
+    <p>Estreno: 18-Ago-2022</p>
+    <p>Genero: Animacion</p>
+  </div>
+  <div class="card-footer">
+    <p class="card-footer-etiqueta">Recomendada para Mayores de 7 años</p>
+    <p class="card-footer-etiqueta">Duracion: 100 Min</p>
+  </div>
+</div> -->
+<div class="container-card">
+  <div class="card" *ngFor="let pelicula of peliculas">
+    <div class="card-header">
+      <img
+        [src]="imgUrl + pelicula.poster_path"
+        alt=""
+        class="card-header-poster"
+      />
+    </div>
+    <div class="card-body">
+      <h3 class="card-title">{{ pelicula.title }}</h3>
+      <p>Fecha de estreno: {{ pelicula.release_date }}</p>
+      <p>Votación: {{ pelicula.vote_average }}</p>
+    </div>
+    <div class="card-footer">
+      <p class="card-footer-etiqueta">Recomendada para Mayores de 7 años</p>
+      <p class="card-footer-etiqueta">Duracion: 100 Min</p>
+    </div>
+  </div>
+</div>

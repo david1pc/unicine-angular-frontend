@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<app-breadcrumb></app-breadcrumb>
+<section class="section-cartelera">
+  <div class="cartelera">
+    <div class="cartelera-busqueda">
+      <select name="" id="" class="select-busqueda">
+        <option value="">Elija la ciudad</option>
+      </select>
+      <select name="" id="" class="select-busqueda">
+        <option value="">Elija el teatro</option>
+      </select>
+    </div>
+    <h2 class="cartelera-title">Estreno</h2>
+    <div class="estreno">
+      <app-pelicula-card [peliculas]="estrenos"></app-pelicula-card>
+    </div>
+    <h2 class="cartelera-title preventa-t">Preventa</h2>
+    <div class="preventa">
+      <app-pelicula-card [peliculas]="preventas"></app-pelicula-card>
+    </div>
+  </div>
+</section>
