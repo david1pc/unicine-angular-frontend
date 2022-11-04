@@ -3,15 +3,50 @@
   <div class="header-registro">
     <h2 class="header-registro-title">Registro de nuevo usuario</h2>
   </div>
-  <form class="form">
-    <input type="text" placeholder="Cedula" class="form-input" />
-    <input type="text" placeholder="Primer nombre" class="form-input" />
-    <input type="text" placeholder="Segundo nombre" class="form-input" />
-    <input type="text" placeholder="Primer apellido" class="form-input" />
-    <input type="text" placeholder="Segundo apellido" class="form-input" />
+  <form class="form" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+    <input
+      type="text"
+      placeholder="Cedula"
+      class="form-input"
+      formControlName="cedula"
+    />
+    <input
+      type="text"
+      placeholder="Primer nombre"
+      class="form-input"
+      formControlName="primer_nombre"
+    />
+    <input
+      type="text"
+      placeholder="Segundo nombre"
+      class="form-input"
+      formControlName="segundo_nombre"
+    />
+    <input
+      type="text"
+      placeholder="Primer apellido"
+      class="form-input"
+      formControlName="primer_apellido"
+    />
+    <input
+      type="text"
+      placeholder="Segundo apellido"
+      class="form-input"
+      formControlName="segundo_apellido"
+    />
     <div class="form-telefonos">
-      <input type="text" placeholder="Telefonos" class="form-input" />
-      <button class="form-btn-telefono">
+      <input
+        type="text"
+        placeholder="Agregar telefono"
+        class="form-input"
+        [formControl]="nuevoTelefono"
+        (keyup.enter)="agregarTelefono()"
+      />
+      <button
+        class="form-btn-telefono"
+        type="button"
+        (click)="agregarTelefono()"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -27,19 +62,44 @@
           />
         </svg>
       </button>
+      <div formArrayName="telefonos">
+        <div *ngFor="let telefono of telefonosArr.controls; let i = index">
+          <input [formControlName]="i" />
+          <button type="button" (click)="borrar(i)">Eliminar</button>
+        </div>
+      </div>
     </div>
-    <input type="text" class="form-input" placeholder="Correo electrónico" />
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Correo electrónico"
+      formControlName="correo"
+    />
     <div class="form-perfil">
-      <label for="img" class="form-perfil-label"
+      <!-- <label for="img" class="form-perfil-label"
         >Seleccionar imagen de perfil</label
       >
-      <input type="file" name="" id="img" />
+      <input type="file" name="" id="img" /> -->
     </div>
-    <input type="password" class="form-input" placeholder="Contraseña" />
+    <input
+      type="password"
+      class="form-input"
+      placeholder="Contraseña"
+      formControlName="password"
+    />
     <p class="info">
       Al registrarte, aceptas nuestras Condiciones de uso y nuestra Política de
       privacidad.
     </p>
-    <button class="form-btn">Registrarse</button>
+    <button class="form-btn" type="submit">Registrarse</button>
   </form>
 </section>
+<span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+
+<span>Agregar juego</span>
+<pre>{{ nuevoTelefono.valid }}</pre>
+<pre>{{ nuevoTelefono.value }}</pre>

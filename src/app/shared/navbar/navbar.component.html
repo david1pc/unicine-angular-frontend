@@ -25,8 +25,15 @@
           </svg>
         </a>
       </li>
-      <li>
+      <li *ngIf="!id; else session">
         <a routerLink="/auth/login" class="main-nav-link nav-cta">Login</a>
+      </li>
+      <li>
+        <ng-template #session>
+          <a routerLink="/" class="main-nav-link nav-cta" (click)="logout()"
+            >Logout</a
+          >
+        </ng-template>
       </li>
     </ul>
   </nav>

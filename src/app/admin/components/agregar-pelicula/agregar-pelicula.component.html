@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 mat-dialog-title>
+    {{ data.codigo ? "Editar" : "Agregar nueva" }} pelicula
+  </h1>
+  <div mat-dialog-content class="container">
+    <p>Nombre</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" />
+    </mat-form-field>
+    <p>Sinopsis</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la sinopsis</mat-label>
+      <input matInput [(ngModel)]="data.sinopsis" />
+    </mat-form-field>
+    <p>Url_trailer</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la url del trailer</mat-label>
+      <input matInput [(ngModel)]="data.url_trailer" />
+    </mat-form-field>
+    <p>Url_imagen</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la url de la imagen</mat-label>
+      <input matInput [(ngModel)]="data.url_img" />
+    </mat-form-field>
+    <p>Genero</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el genero</mat-label>
+      <mat-select [(ngModel)]="data.genero" name="genero">
+        <mat-option *ngFor="let genero of generos" [value]="genero">
+          {{ genero }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Reparto</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el reparto</mat-label>
+      <input matInput [(ngModel)]="data.reparto" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+      Confirmar
+    </button>
+  </div>
+</div>

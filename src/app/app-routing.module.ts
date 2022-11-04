@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home.component';
 import { CarritoComponent } from './shared/carrito/carrito.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const rutas: Routes = [
   {
@@ -26,6 +27,13 @@ const rutas: Routes = [
     path: 'confiteria',
     loadChildren: () =>
       import('./confiteria/confiteria.module').then((m) => m.ConfiteriaModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 ];
 
