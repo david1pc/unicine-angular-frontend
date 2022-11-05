@@ -8,6 +8,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { CuponesComponent } from './pages/cupones/cupones.component';
 import { AgregarPeliculaComponent } from './components/agregar-pelicula/agregar-pelicula.component';
 import { EliminarPeliculaComponent } from './components/eliminar-pelicula/eliminar-pelicula.component';
+import { AgregarCuponComponent } from './components/agregar-cupon/agregar-cupon.component';
+import { EliminarCuponComponent } from './components/eliminar-cupon/eliminar-cupon.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { EliminarPeliculaComponent } from './components/eliminar-pelicula/elimin
     CuponesComponent,
     AgregarPeliculaComponent,
     EliminarPeliculaComponent,
+    AgregarCuponComponent,
+    EliminarCuponComponent,
   ],
   imports: [
     CommonModule,

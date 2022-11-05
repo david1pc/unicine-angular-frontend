@@ -2,7 +2,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Pelicula, ResultadoPeliculas } from '../interfaces/admin.interface';
+import {
+  Cupon,
+  Pelicula,
+  ResultadoCupones,
+  ResultadoPeliculas,
+} from '../interfaces/admin.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {
@@ -50,6 +55,41 @@ export class AdminService {
     return this.http.post<any>(
       `${this.base_url}/admin/peliculas/eliminar`,
       peliculas_id
+    );
+  }
+
+  listarCupones(): Observable<ResultadoCupones> {
+    return this.http.get<ResultadoCupones>(`${this.base_url}/admin/cupones/`);
+  }
+
+  agregarCupon(cupon: Cupon): Observable<Cupon> {
+    let nuevo: Cupon = {
+      codigo: 0,
+      descripcion: cupon.descripcion,
+      criterio: cupon.criterio,
+      descuento: cupon.descuento,
+      vencimiento: cupon.vencimiento,
+      cuponClientes: [],
+    };
+    return this.http.post<Cupon>(`${this.base_url}/admin/cupones/`, nuevo);
+  }
+
+  editarCupon(cupon: Cupon): Observable<Cupon> {
+    let nuevo: Cupon = {
+      codigo: cupon.codigo,
+      descripcion: cupon.descripcion,
+      criterio: cupon.criterio,
+      descuento: cupon.descuento,
+      vencimiento: cupon.vencimiento,
+      cuponClientes: [],
+    };
+    return this.http.put<Cupon>(`${this.base_url}/admin/cupones/`, nuevo);
+  }
+
+  eliminarCupon(cupones_id: number[]): Observable<any> {
+    return this.http.post<any>(
+      `${this.base_url}/admin/cupones/eliminar`,
+      cupones_id
     );
   }
 }

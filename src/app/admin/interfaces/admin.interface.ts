@@ -1,5 +1,11 @@
+import { Cliente } from 'src/app/auth/interfaces/cliente.interface';
+
 export interface ResultadoPeliculas {
   peliculas: Pelicula[];
+}
+
+export interface ResultadoCupones {
+  cupones: Cupon[];
 }
 
 export interface Pelicula {
@@ -57,6 +63,31 @@ export interface Entrada {
   precio: number;
   fila: string;
   columna: number;
+}
+
+export interface Confiteria {
+  codigo?: number;
+  nombre: string;
+  precio: number;
+  descripcion: string;
+  imagen: string;
+  compraConfiterias?: CompraConfiteria[];
+}
+
+export interface Cupon {
+  codigo: number;
+  descripcion: string;
+  descuento: number;
+  criterio: string;
+  vencimiento: Date;
+  cuponClientes: CuponCliente[];
+}
+
+export interface CuponCliente {
+  codigo?: number;
+  estado: boolean;
+  cupon: Cupon;
+  cliente: Cliente;
 }
 
 export enum Genero {

@@ -1,3 +1,5 @@
+import { Cupon } from 'src/app/admin/interfaces/admin.interface';
+
 export interface Cliente {
   codigo?: number;
   primerNombre: string;
@@ -42,14 +44,6 @@ export interface CuponCliente {
   estado: boolean;
   cupon: Cupon;
   cliente: Cliente;
-}
-
-export interface Cupon {
-  codigo: number;
-  descripcion: string;
-  descuento: number;
-  criterio: string;
-  vencimiento: Date;
 }
 
 export interface Usuario {

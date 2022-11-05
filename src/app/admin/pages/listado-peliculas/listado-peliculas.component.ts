@@ -142,6 +142,7 @@ export class ListadoPeliculasComponent implements OnInit {
       if (estadoConfirmacion) {
         this.adminService.eliminarPelicula(ids_peliculas).subscribe((resp) => {
           this.ngOnInit();
+          this.selection.clear();
         });
       }
     });

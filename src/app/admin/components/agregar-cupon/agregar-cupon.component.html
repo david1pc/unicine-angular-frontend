@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 mat-dialog-title>{{ data.codigo ? "Editar" : "Agregar nuevo" }} cupon</h1>
+  <div mat-dialog-content class="container">
+    <p>Descripción</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la descripción</mat-label>
+      <input matInput [(ngModel)]="data.descripcion" />
+    </mat-form-field>
+    <p>Criterio</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el criterio</mat-label>
+      <input matInput [(ngModel)]="data.criterio" />
+    </mat-form-field>
+    <p>Descuento</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el descuento</mat-label>
+      <input matInput [(ngModel)]="data.descuento" />
+    </mat-form-field>
+    <p>Fecha de vencimiento</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la fecha de vencimiento</mat-label>
+      <input matInput [(ngModel)]="data.vencimiento" type="date" />
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>
