@@ -1,15 +1,16 @@
-<div class="demo-button-container">
-  <button mat-raised-button (click)="agregar()" class="btn-agg">
+<div class="demo-button-container container-button">
+  <button mat-raised-button (click)="agregar()" class="btn" color="primary">
     <mat-icon>add</mat-icon>
   </button>
-  <button mat-raised-button (click)="editar()" class="btn-edit">
+  <button mat-raised-button (click)="editar()" class="btn" color="accent">
     <mat-icon>create</mat-icon>
   </button>
   <button
     mat-raised-button
     [disabled]="!dataSource"
     (click)="eliminar()"
-    class="btn-del"
+    class="btn"
+    color="warn"
   >
     <mat-icon>delete_sweep</mat-icon>
   </button>

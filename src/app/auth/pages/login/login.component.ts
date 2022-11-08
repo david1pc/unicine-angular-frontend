@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Login, rol } from '../../interfaces/cliente.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   miFormulario: FormGroup = this.fb.group({
-    correo: [, [Validators.required, Validators.minLength(5)]],
+    username: [, [Validators.required, Validators.minLength(5)]],
     password: [, [Validators.required, Validators.minLength(5)]],
   });
 
@@ -32,16 +33,33 @@ export class LoginComponent implements OnInit {
     }
 
     const login: Login = {
-      correo: this.miFormulario.controls['correo'].value,
+      username: this.miFormulario.controls['username'].value,
       password: this.miFormulario.controls['password'].value,
     };
 
-    this.authService.login(login).subscribe((resp) => {
-      if (resp.auth.rol === rol.CLIENTE) {
-        this.router.navigate(['./']);
-      } else {
-        this.router.navigate(['./admin/listado-peliculas']);
-      }
+    this.authService.iniciar_sesion(login).subscribe({
+      next: (resp) => {
+        this.router.navigate(['/cartelera']);
+        Swal.fire({
+          title: resp.mensaje,
+          icon: 'success',
+        });
+      },
+      error: (err) => {
+        if (err.status == 406) {
+          Swal.fire({
+            title: err.error.mensaje,
+            icon: 'info',
+            text: err.error.error,
+          });
+        } else if (err.status == 404) {
+          Swal.fire({
+            title: err.error.mensaje,
+            icon: 'error',
+            text: err.error.error,
+          });
+        }
+      },
     });
   }
 }

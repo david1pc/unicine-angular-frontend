@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { RecuperacionCuentaCorreoComponent } from './pages/recuperacion-cuenta-correo/recuperacion-cuenta-correo.component';
 import { RecuperacionCuentaPasswordComponent } from './pages/recuperacion-cuenta-password/recuperacion-cuenta-password.component';
+import { ActivacionCuentaComponent } from './pages/activacion-cuenta/activacion-cuenta.component';
 
 const rutas: Routes = [
   {
@@ -25,6 +26,10 @@ const rutas: Routes = [
       {
         path: 'recuperacion/:token',
         component: RecuperacionCuentaPasswordComponent,
+      },
+      {
+        path: 'activacion/:msj',
+        component: ActivacionCuentaComponent,
       },
       {
         path: '**',

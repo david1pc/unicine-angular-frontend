@@ -8,23 +8,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  id!: Number | undefined;
-  rol!: String | undefined;
+  username: string | null = localStorage.getItem('username');
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-    let id_local: Number = Number(localStorage.getItem('token'));
-    if (id_local && this.id == null) {
-      this.id = id_local;
-      this.rol = String(localStorage.getItem('rol'));
-    }
-  }
+  ngOnInit(): void {}
 
   logout() {
-    this.id = undefined;
-    this.rol = undefined;
     this.authService.logout();
-    this.router.navigate(['./']);
+    window.location.href = 'http://localhost:4200/';
   }
 }

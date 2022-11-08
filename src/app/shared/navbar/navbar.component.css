@@ -59,3 +59,15 @@
   width: 3rem;
   stroke: #2a2c41;
 }
+
+.login-confirm {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.login-confirm-p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #2a2c41;
+}

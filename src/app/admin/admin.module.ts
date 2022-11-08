@@ -10,6 +10,7 @@ import { AgregarPeliculaComponent } from './components/agregar-pelicula/agregar-
 import { EliminarPeliculaComponent } from './components/eliminar-pelicula/eliminar-pelicula.component';
 import { AgregarCuponComponent } from './components/agregar-cupon/agregar-cupon.component';
 import { EliminarCuponComponent } from './components/eliminar-cupon/eliminar-cupon.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EliminarCuponComponent } from './components/eliminar-cupon/eliminar-cup
     EliminarPeliculaComponent,
     AgregarCuponComponent,
     EliminarCuponComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -28,5 +30,6 @@ import { EliminarCuponComponent } from './components/eliminar-cupon/eliminar-cup
     ReactiveFormsModule,
     FormsModule,
   ],
+  exports: [DialogComponent],
 })
 export class AdminModule {}

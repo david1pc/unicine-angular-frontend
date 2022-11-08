@@ -13,11 +13,38 @@ export interface Pelicula {
   nombre: string;
   sinopsis: string;
   url_trailer: string;
-  url_img: string;
+  imagen: Imagen;
   genero: Genero;
   estado: boolean;
   reparto: string;
   funciones?: Funcion[];
+}
+
+export interface Dialog {
+  titulo: string;
+  descripcion: string;
+  estado: boolean;
+  icono: string;
+}
+
+export interface PeliculaFile {
+  codigo: number;
+  nombre: string;
+  sinopsis: string;
+  imagen: Imagen;
+  imagenFile: File;
+  url_trailer: string;
+  genero: Genero;
+  estado: boolean;
+  reparto: string;
+  funciones?: Funcion[];
+}
+
+export interface Imagen {
+  codigo: number;
+  nombre: string;
+  imagenUrl: string;
+  imagenId: string;
 }
 
 export interface Funcion {

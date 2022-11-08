@@ -1,17 +1,18 @@
 <div class="container">
   <h1 mat-dialog-title class="header">
-    <mat-icon>warning</mat-icon>Eliminar peliculas
+    <mat-icon>{{ dialog.icono }}</mat-icon>
+    {{ dialog.titulo }}
   </h1>
-  <p>¿Desea continuar con el proceso?</p>
+  <p>{{ dialog.descripcion }}</p>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>
     <button
       mat-button
-      [mat-dialog-close]="estadoConfirmacion"
+      [mat-dialog-close]="dialog.estado"
       (click)="cambiarEstado()"
       cdkFocusInitial
     >
-      Confirmar
+      Aceptar
     </button>
   </div>
 </div>

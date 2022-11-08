@@ -6,41 +6,93 @@
     <p>Nombre</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese el nombre</mat-label>
-      <input matInput [(ngModel)]="data.nombre" />
+      <input matInput [(ngModel)]="data.nombre" required />
+      <mat-error *ngIf="!data.nombre">Debe ingresar un nombre</mat-error>
     </mat-form-field>
     <p>Sinopsis</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese la sinopsis</mat-label>
-      <input matInput [(ngModel)]="data.sinopsis" />
+      <input matInput [(ngModel)]="data.sinopsis" required />
+      <mat-error *ngIf="!data.sinopsis">Debe ingresar la sinopsis</mat-error>
     </mat-form-field>
     <p>Url_trailer</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese la url del trailer</mat-label>
-      <input matInput [(ngModel)]="data.url_trailer" />
-    </mat-form-field>
-    <p>Url_imagen</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Ingrese la url de la imagen</mat-label>
-      <input matInput [(ngModel)]="data.url_img" />
+      <input matInput [(ngModel)]="data.url_trailer" required />
+      <mat-error *ngIf="!data.url_trailer"
+        >Debe ingresar la url del trailer</mat-error
+      >
     </mat-form-field>
     <p>Genero</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese el genero</mat-label>
-      <mat-select [(ngModel)]="data.genero" name="genero">
+      <mat-select [(ngModel)]="data.genero" name="genero" required>
         <mat-option *ngFor="let genero of generos" [value]="genero">
           {{ genero }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="!data.url_trailer"
+        >Debe ingresar el genero de la pelicula</mat-error
+      >
     </mat-form-field>
     <p>Reparto</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese el reparto</mat-label>
-      <input matInput [(ngModel)]="data.reparto" />
+      <input matInput [(ngModel)]="data.reparto" required />
+      <mat-error *ngIf="!data.reparto">Debe ingresar el reparto</mat-error>
     </mat-form-field>
+    <p>Estado</p>
+    <mat-slide-toggle [(ngModel)]="data.estado"
+      >Inactivo/Activo</mat-slide-toggle
+    >
+    <p>Imagen</p>
+    <input
+      #imgInput
+      hidden="true"
+      type="file"
+      onclick="this.value=null"
+      (change)="onFileSelected($event)"
+      accept=".jpg, .png, .jpeg"
+    />
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="imgInput.click()"
+      *ngIf="!data.codigo; else ad"
+    >
+      {{
+        img_seleccionada.length == 0
+          ? "Elegir imagen"
+          : "Imagen seleccionada: " + img_seleccionada
+      }}
+    </button>
+    <ng-template #ad>
+      <button mat-flat-button color="primary" (click)="imgInput.click()">
+        {{
+          !data.imagen
+            ? "Elegir imagen"
+            : "Imagen seleccionada: " +
+              (img_seleccionada.length == 0
+                ? data.imagen.nombre
+                : img_seleccionada)
+        }}
+      </button>
+    </ng-template>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="
+        !data.nombre ||
+        !data.sinopsis ||
+        !data.genero ||
+        !data.reparto ||
+        !data.url_trailer
+      "
+    >
       Confirmar
     </button>
   </div>

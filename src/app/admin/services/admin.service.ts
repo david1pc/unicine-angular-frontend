@@ -1,10 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import {
   Cupon,
+  Imagen,
   Pelicula,
+  PeliculaFile,
   ResultadoCupones,
   ResultadoPeliculas,
 } from '../interfaces/admin.interface';
@@ -21,22 +24,46 @@ export class AdminService {
     );
   }
 
-  agregarPelicula(pelicula: Pelicula): Observable<Pelicula> {
+  agregarPelicula(pelicula: PeliculaFile): Observable<Pelicula> {
+    let imagen_d!: Imagen;
     let nueva: Pelicula = {
       codigo: 0,
       nombre: pelicula.nombre,
       genero: pelicula.genero,
-      estado: false,
+      estado: pelicula.estado,
       reparto: pelicula.reparto,
       sinopsis: pelicula.sinopsis,
-      url_img: pelicula.url_img,
+      imagen: imagen_d,
       url_trailer: pelicula.url_trailer,
       funciones: [],
     };
-    return this.http.post<Pelicula>(`${this.base_url}/admin/peliculas/`, nueva);
+
+    if (pelicula.imagenFile) {
+      let file: File = pelicula.imagenFile;
+      const fd = new FormData();
+      fd.append('imagen', file);
+      fd.append(
+        'pelicula',
+        new Blob([JSON.stringify(nueva)], {
+          type: 'application/json',
+        })
+      );
+      return this.http.post<Pelicula>(`${this.base_url}/admin/peliculas/`, fd);
+    } else {
+      return this.http.post<Pelicula>(
+        `${this.base_url}/admin/peliculas-data/`,
+        nueva
+      );
+    }
   }
 
-  editarPelicula(pelicula: Pelicula): Observable<Pelicula> {
+  editarPelicula(pelicula: PeliculaFile): Observable<Pelicula> {
+    let imagen_d: Imagen = {
+      codigo: 0,
+      imagenId: '',
+      imagenUrl: '',
+      nombre: '',
+    };
     let nueva: Pelicula = {
       codigo: pelicula.codigo,
       nombre: pelicula.nombre,
@@ -44,11 +71,30 @@ export class AdminService {
       estado: pelicula.estado,
       reparto: pelicula.reparto,
       sinopsis: pelicula.sinopsis,
-      url_img: pelicula.url_img,
+      imagen: imagen_d,
       url_trailer: pelicula.url_trailer,
       funciones: pelicula.funciones,
     };
-    return this.http.put<Pelicula>(`${this.base_url}/admin/peliculas/`, nueva);
+
+    if (pelicula.imagenFile) {
+      let file: File = pelicula.imagenFile;
+      nueva.imagen = pelicula.imagen;
+      const fd = new FormData();
+      fd.append('imagen', file);
+      fd.append(
+        'pelicula',
+        new Blob([JSON.stringify(nueva)], {
+          type: 'application/json',
+        })
+      );
+      return this.http.put<Pelicula>(`${this.base_url}/admin/peliculas/`, fd);
+    } else {
+      nueva.imagen = pelicula.imagen;
+      return this.http.put<Pelicula>(
+        `${this.base_url}/admin/peliculas-data/`,
+        nueva
+      );
+    }
   }
 
   eliminarPelicula(peliculas_id: number[]): Observable<any> {

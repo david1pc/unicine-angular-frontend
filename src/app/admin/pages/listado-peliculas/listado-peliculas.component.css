@@ -2,10 +2,16 @@ table {
   width: 100%;
 }
 
-.btn-agg {
-  color: blue;
+.column-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
-.btn-del {
-  color: red;
+.container-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  margin-left: 1.6rem;
 }

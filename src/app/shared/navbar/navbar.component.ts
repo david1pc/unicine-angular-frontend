@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -7,19 +8,15 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  id!: Number | undefined;
+  username: string | null = localStorage.getItem('username');
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
-    let id_local: Number = Number(localStorage.getItem('token'));
-    if (id_local && this.id == null) {
-      this.id = id_local;
-    }
-  }
+  ngOnInit(): void {}
 
   logout() {
-    this.id = undefined;
     this.authService.logout();
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 }

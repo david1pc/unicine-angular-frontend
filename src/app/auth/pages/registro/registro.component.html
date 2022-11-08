@@ -4,89 +4,144 @@
     <h2 class="header-registro-title">Registro de nuevo usuario</h2>
   </div>
   <form class="form" [formGroup]="miFormulario" (ngSubmit)="guardar()">
-    <input
-      type="text"
-      placeholder="Cedula"
-      class="form-input"
-      formControlName="cedula"
-    />
-    <input
-      type="text"
-      placeholder="Primer nombre"
-      class="form-input"
-      formControlName="primer_nombre"
-    />
-    <input
-      type="text"
-      placeholder="Segundo nombre"
-      class="form-input"
-      formControlName="segundo_nombre"
-    />
-    <input
-      type="text"
-      placeholder="Primer apellido"
-      class="form-input"
-      formControlName="primer_apellido"
-    />
-    <input
-      type="text"
-      placeholder="Segundo apellido"
-      class="form-input"
-      formControlName="segundo_apellido"
-    />
-    <div class="form-telefonos">
+    <div>
       <input
         type="text"
-        placeholder="Agregar telefono"
+        placeholder="Cedula"
         class="form-input"
-        [formControl]="nuevoTelefono"
-        (keyup.enter)="agregarTelefono()"
+        formControlName="cedula"
       />
-      <button
-        class="form-btn-telefono"
-        type="button"
-        (click)="agregarTelefono()"
+      <span class="form-text text-danger" *ngIf="campoEsValido('cedula')"
+        >La cedula debe tener minimo 5 caracteres</span
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="telefono-btn"
+    </div>
+    <div>
+      <input
+        type="text"
+        placeholder="Primer nombre"
+        class="form-input"
+        formControlName="primer_nombre"
+      />
+      <span class="form-text text-danger" *ngIf="campoEsValido('primer_nombre')"
+        >El primer nombre debe tener minimo 3 caracteres</span
+      >
+    </div>
+    <div>
+      <input
+        type="text"
+        placeholder="Segundo nombre"
+        class="form-input"
+        formControlName="segundo_nombre"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        placeholder="Primer apellido"
+        class="form-input"
+        formControlName="primer_apellido"
+      />
+      <span
+        class="form-text text-danger"
+        *ngIf="campoEsValido('primer_apellido')"
+        >El primer apellido debe tener minimo 3 caracteres</span
+      >
+    </div>
+    <div>
+      <input
+        type="text"
+        placeholder="Segundo apellido"
+        class="form-input"
+        formControlName="segundo_apellido"
+      />
+    </div>
+    <div class="form-telefonos">
+      <div class="telefonos-input">
+        <input
+          type="text"
+          placeholder="Agregar telefono"
+          class="form-input"
+          [formControl]="nuevoTelefono"
+          (keyup.enter)="agregarTelefono()"
+        />
+        <button
+          class="form-btn-telefono"
+          type="button"
+          (click)="agregarTelefono()"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
-      </button>
-      <div formArrayName="telefonos">
-        <div *ngFor="let telefono of telefonosArr.controls; let i = index">
-          <input [formControlName]="i" />
-          <button type="button" (click)="borrar(i)">Eliminar</button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="telefono-btn"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </button>
+      </div>
+      <div formArrayName="telefonos" class="telefonos-arr">
+        <div
+          *ngFor="let telefono of telefonosArr.controls; let i = index"
+          class="telefonos-arr-controls"
+        >
+          <input [formControlName]="i" class="telefonos-edit-input" />
+          <button type="button" (click)="borrar(i)" class="btn-eliminar">
+            Eliminar
+          </button>
         </div>
       </div>
     </div>
-    <input
-      type="text"
-      class="form-input"
-      placeholder="Correo electrónico"
-      formControlName="correo"
-    />
+    <div>
+      <input
+        type="email"
+        class="form-input"
+        placeholder="Correo electrónico"
+        formControlName="correo"
+      />
+      <span class="form-text text-danger" *ngIf="campoEsValido('correo')"
+        >Debe ingresar un correo valido</span
+      >
+    </div>
+    <div>
+      <input
+        type="text"
+        class="form-input"
+        placeholder="Username"
+        formControlName="username"
+      />
+      <span class="form-text text-danger" *ngIf="campoEsValido('username')"
+        >Debe ingresar un username valido</span
+      >
+    </div>
     <div class="form-perfil">
-      <!-- <label for="img" class="form-perfil-label"
+      <label for="img" class="form-perfil-label"
         >Seleccionar imagen de perfil</label
       >
-      <input type="file" name="" id="img" /> -->
+      <input
+        type="file"
+        id="img"
+        formControlName="imagen"
+        (change)="uploadFile($event)"
+        accept="image/png, image/jpeg, image/jpg"
+      />
     </div>
-    <input
-      type="password"
-      class="form-input"
-      placeholder="Contraseña"
-      formControlName="password"
-    />
+    <div>
+      <input
+        type="password"
+        class="form-input"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+      <span class="form-text text-danger" *ngIf="campoEsValido('password')"
+        >Debe ingresar una contraseña</span
+      >
+    </div>
     <p class="info">
       Al registrarte, aceptas nuestras Condiciones de uso y nuestra Política de
       privacidad.

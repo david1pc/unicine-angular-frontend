@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home.component';
 import { CarritoComponent } from './shared/carrito/carrito.component';
-import { AuthGuard } from './auth/guards/auth.guard';
+import { Error401Component } from './shared/error401/error401.component';
 
 const rutas: Routes = [
   {
@@ -13,6 +13,10 @@ const rutas: Routes = [
   {
     path: 'carrito',
     component: CarritoComponent,
+  },
+  {
+    path: 'error-401',
+    component: Error401Component,
   },
   {
     path: 'auth',
@@ -32,8 +36,6 @@ const rutas: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
   },
 ];
 

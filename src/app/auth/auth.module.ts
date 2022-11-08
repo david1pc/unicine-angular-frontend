@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { RecuperacionCuentaCorreoComponent } from './pages/recuperacion-cuenta-correo/recuperacion-cuenta-correo.component';
 import { RecuperacionCuentaPasswordComponent } from './pages/recuperacion-cuenta-password/recuperacion-cuenta-password.component';
+import { MaterialModule } from '../material/material.module';
+import { ActivacionCuentaComponent } from './pages/activacion-cuenta/activacion-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { RecuperacionCuentaPasswordComponent } from './pages/recuperacion-cuenta
     RegistroComponent,
     RecuperacionCuentaCorreoComponent,
     RecuperacionCuentaPasswordComponent,
+    ActivacionCuentaComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, ReactiveFormsModule],
 })

@@ -25,15 +25,15 @@
           </svg>
         </a>
       </li>
-      <li *ngIf="!id; else session">
+      <li *ngIf="!username">
         <a routerLink="/auth/login" class="main-nav-link nav-cta">Login</a>
       </li>
-      <li>
-        <ng-template #session>
-          <a routerLink="/" class="main-nav-link nav-cta" (click)="logout()"
-            >Logout</a
-          >
-        </ng-template>
+      <li *ngIf="username" class="login-confirm">
+        <a routerLink="/cartelera" class="main-nav-link">Perfil</a>
+        <p class="login-confirm-p" src="">Bienvenido, {{ username }}</p>
+        <a routerLink="/" class="main-nav-link nav-cta" (click)="logout()">
+          Logout</a
+        >
       </li>
     </ul>
   </nav>

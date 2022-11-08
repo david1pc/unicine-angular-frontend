@@ -4,26 +4,51 @@
     <p>Descripción</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese la descripción</mat-label>
-      <input matInput [(ngModel)]="data.descripcion" />
+      <input matInput [(ngModel)]="data.descripcion" required />
+      <mat-error *ngIf="!data.descripcion"
+        >Debe ingresar la descripcion</mat-error
+      >
     </mat-form-field>
     <p>Criterio</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese el criterio</mat-label>
-      <input matInput [(ngModel)]="data.criterio" />
+      <input matInput [(ngModel)]="data.criterio" required />
+      <mat-error *ngIf="!data.criterio">Debe ingresar el criterio</mat-error>
     </mat-form-field>
     <p>Descuento</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese el descuento</mat-label>
-      <input matInput [(ngModel)]="data.descuento" />
+      <input
+        matInput
+        [(ngModel)]="data.descuento"
+        type="number"
+        [formControl]="descuentoControl"
+      />
+      <mat-error *ngIf="validarDescuento()"
+        >Debe ingresar un descuento mayor o igual a 1</mat-error
+      >
     </mat-form-field>
     <p>Fecha de vencimiento</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese la fecha de vencimiento</mat-label>
-      <input matInput [(ngModel)]="data.vencimiento" type="date" />
+      <input matInput [(ngModel)]="data.vencimiento" type="date" required />
+      <mat-error *ngIf="!data.vencimiento"
+        >Debe ingresar la fecha de vencimiento</mat-error
+      >
     </mat-form-field>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+      <button
+        mat-button
+        [mat-dialog-close]="data"
+        cdkFocusInitial
+        [disabled]="
+          !data.descripcion ||
+          validarDescuento() ||
+          !data.vencimiento ||
+          !data.criterio
+        "
+      >
         Confirmar
       </button>
     </div>

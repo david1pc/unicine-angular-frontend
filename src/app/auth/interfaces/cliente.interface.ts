@@ -1,4 +1,4 @@
-import { Cupon } from 'src/app/admin/interfaces/admin.interface';
+import { Cupon, Imagen } from 'src/app/admin/interfaces/admin.interface';
 
 export interface Cliente {
   codigo?: number;
@@ -7,13 +7,30 @@ export interface Cliente {
   primerApellido: string;
   segundoApellido?: string;
   correo: string;
+  username: string;
   password: string;
   cedula: string;
   estado: boolean;
   telefonos?: string[];
-  imagen_perfil?: string;
+  imagen: File;
   compras?: Compra[];
   cuponClientes?: CuponCliente[];
+  rol: Rol;
+}
+
+export interface LoginUser {
+  mensaje: string;
+  login: TokenUser;
+}
+
+export interface TokenUser {
+  jwttoken: string;
+  username: string;
+}
+
+export interface Rol {
+  codigo?: number;
+  nombre: string;
 }
 
 export interface Compra {
@@ -57,7 +74,7 @@ export interface Auth {
 }
 
 export interface Login {
-  correo: string;
+  username: string;
   password: string;
 }
 

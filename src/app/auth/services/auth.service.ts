@@ -1,81 +1,58 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {
-  Auth,
-  Cliente,
-  Login,
-  rol,
-  Usuario,
-} from '../interfaces/cliente.interface';
+import { Cliente, Login, LoginUser } from '../interfaces/cliente.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private base_url: string = environment.baseApiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  crearCliente(cliente: Cliente): Observable<Object> {
-    return this.http.post<Object>(`${this.base_url}/clientes/`, cliente);
+  crearCliente(cliente: Cliente): Observable<LoginUser> {
+    if (cliente.imagen) {
+      let file: File = cliente.imagen;
+      const fd = new FormData();
+      fd.append('imagen', file);
+      fd.append(
+        'cliente',
+        new Blob([JSON.stringify(cliente)], {
+          type: 'application/json',
+        })
+      );
+      return this.http.post<LoginUser>(
+        `${this.base_url}/clientes/registro/`,
+        fd
+      );
+    } else {
+      return this.http.post<LoginUser>(
+        `${this.base_url}/clientes/registro-data/`,
+        cliente
+      );
+    }
   }
 
-  auth!: Auth | undefined;
-
-  get Auth() {
-    return { ...this.auth };
-  }
-
-  verificaAutenticacion(): Observable<boolean> {
-    const rol_str: string = String(localStorage.getItem('rol'));
-    if (
-      !localStorage.getItem('token') ||
-      !localStorage.getItem('correo') ||
-      rol_str == rol.CLIENTE
-    ) {
-      return of(false);
-    }
-
-    let rol_user!: rol;
-
-    if (rol_str === rol.ADMINISTRADOR) {
-      rol_user = rol.ADMINISTRADOR;
-    } else if (rol_str === rol.ADMINISTRADOR_TEATRO) {
-      rol_user = rol.ADMINISTRADOR_TEATRO;
-    }
-
-    const autha: Auth = {
-      codigo: Number(localStorage.getItem('token')),
-      correo: String(localStorage.getItem('correo')),
-      rol: rol_user,
-    };
-
-    this.auth = autha;
-
+  iniciar_sesion(login: Login): Observable<LoginUser> {
     return this.http
-      .post<Auth>(`${this.base_url}/clientes/verificar-usuario/`, this.Auth)
+      .post<LoginUser>(`${this.base_url}/clientes/login/`, login)
       .pipe(
-        map((auth) => {
-          this.auth = auth;
-          return true;
+        map((resp: LoginUser) => {
+          localStorage.setItem('token', resp.login.jwttoken);
+          localStorage.setItem('username', resp.login.username);
+          return resp;
         })
       );
   }
 
-  login(login: Login) {
-    return this.http
-      .post<Usuario>(`${this.base_url}/clientes/login/`, login)
-      .pipe(
-        tap((usuario) => {
-          localStorage.setItem('correo', usuario.auth.correo);
-          localStorage.setItem('token', String(usuario.auth.codigo));
-          localStorage.setItem('rol', usuario.auth.rol);
-        })
-      );
+  activarCuenta(str: string | null): Observable<any> {
+    return this.http.get<any>(
+      `${this.base_url}/clientes/activacion-cuenta/${str}`
+    );
   }
 
   logout() {
-    this.auth = undefined;
     localStorage.clear();
   }
 }
