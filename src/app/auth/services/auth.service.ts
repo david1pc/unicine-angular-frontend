@@ -38,9 +38,10 @@ export class AuthService {
     return this.http
       .post<LoginUser>(`${this.base_url}/clientes/login/`, login)
       .pipe(
-        map((resp: LoginUser) => {
+        map((resp: any) => {
           localStorage.setItem('token', resp.login.jwttoken);
           localStorage.setItem('username', resp.login.username);
+          localStorage.setItem('rol', resp.login.rol);
           return resp;
         })
       );

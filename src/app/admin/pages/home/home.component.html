@@ -8,11 +8,21 @@
       </button>
     </mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="/"
+        ><mat-icon mat-list-icon>home</mat-icon><span>Ir al inicio</span></a
+      >
       <a mat-list-item routerLink="./listado-peliculas"
         ><mat-icon mat-list-icon>movie</mat-icon><span>Peliculas</span></a
       >
       <a mat-list-item routerLink="./cupones"
-        ><mat-icon mat-list-icon>loyalty</mat-icon><span>Cupones</span></a
+        ><mat-icon mat-list-icon>redeem</mat-icon><span>Cupones</span></a
+      >
+      <a mat-list-item routerLink="./teatro"
+        ><mat-icon mat-list-icon>theaters</mat-icon><span>Admin teatro</span></a
+      >
+      <a mat-list-item routerLink="./confiteria"
+        ><mat-icon mat-list-icon>local_pizza</mat-icon
+        ><span>Confiteria</span></a
       >
       <a mat-list-item routerLink="./buscar" (click)="logout()"
         ><mat-icon mat-list-icon>exit_to_app</mat-icon><span>Logout</span></a

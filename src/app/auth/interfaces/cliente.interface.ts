@@ -26,6 +26,7 @@ export interface LoginUser {
 export interface TokenUser {
   jwttoken: string;
   username: string;
+  rol: string;
 }
 
 export interface Rol {

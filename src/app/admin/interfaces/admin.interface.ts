@@ -1,4 +1,4 @@
-import { Cliente } from 'src/app/auth/interfaces/cliente.interface';
+import { Cliente, Rol } from 'src/app/auth/interfaces/cliente.interface';
 
 export interface ResultadoPeliculas {
   peliculas: Pelicula[];
@@ -6,6 +6,40 @@ export interface ResultadoPeliculas {
 
 export interface ResultadoCupones {
   cupones: Cupon[];
+}
+
+export interface ResultadoAdminsTeatro {
+  administradorTeatro: AdministradorTeatro[];
+}
+
+export interface ResultadoConfiteria {
+  confiterias: Confiteria[];
+}
+
+export interface AdministradorTeatro {
+  codigo: number;
+  primerNombre: string;
+  segundoNombre: null;
+  primerApellido: string;
+  segundoApellido: null;
+  correo: string;
+  username: string;
+  password: string;
+  teatros: Teatro[];
+  rol: Rol;
+}
+
+export interface Teatro {
+  codigo: number;
+  direccion: string;
+  telefono: string;
+  administradorTeatro: AdministradorTeatro;
+  ciudad: Ciudad;
+}
+
+export interface Ciudad {
+  codigo: number;
+  nombre: string;
 }
 
 export interface Pelicula {
@@ -93,11 +127,21 @@ export interface Entrada {
 }
 
 export interface Confiteria {
-  codigo?: number;
+  codigo: number;
   nombre: string;
   precio: number;
   descripcion: string;
-  imagen: string;
+  imagen: Imagen;
+  compraConfiterias?: CompraConfiteria[];
+}
+
+export interface ConfiteriaFile {
+  codigo: number;
+  nombre: string;
+  precio: number;
+  descripcion: string;
+  imagen: Imagen;
+  imagenFile: File;
   compraConfiterias?: CompraConfiteria[];
 }
 

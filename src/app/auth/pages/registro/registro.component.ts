@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Imagen } from 'src/app/admin/interfaces/admin.interface';
+import Swal from 'sweetalert2';
 import { Cliente, Rol } from '../../interfaces/cliente.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -98,8 +99,21 @@ export class RegistroComponent implements OnInit {
 
     this.nuevoCliente = cliente;
 
-    this.authService.crearCliente(this.nuevoCliente).subscribe((resp) => {
-      console.log(resp);
+    this.authService.crearCliente(this.nuevoCliente).subscribe({
+      next: (resp) => {
+        Swal.fire({
+          title: 'Registro de cliente',
+          text: resp.mensaje,
+          icon: 'success',
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          title: err.error.mensaje,
+          icon: 'error',
+          text: err.error.error,
+        });
+      },
     });
 
     let rol_a!: Rol;

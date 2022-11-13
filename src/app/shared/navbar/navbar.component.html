@@ -30,6 +30,12 @@
       </li>
       <li *ngIf="username" class="login-confirm">
         <a routerLink="/cartelera" class="main-nav-link">Perfil</a>
+        <a
+          routerLink="/admin"
+          class="main-nav-link"
+          *ngIf="rol === 'ROLE_ADMIN' || rol === 'ROLE_ADMIN_TEATRO'"
+          >Admin</a
+        >
         <p class="login-confirm-p" src="">Bienvenido, {{ username }}</p>
         <a routerLink="/" class="main-nav-link nav-cta" (click)="logout()">
           Logout</a

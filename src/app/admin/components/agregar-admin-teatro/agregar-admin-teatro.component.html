@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>
+  {{ data.codigo ? "Editar" : "Agregar nuevo" }} administrador teatro
+</h1>
+<div mat-dialog-content class="container">
+  <p>Primer nombre</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el primer nombre</mat-label>
+    <input matInput [(ngModel)]="data.primerNombre" required />
+    <mat-error *ngIf="!data.primerNombre"
+      >Debe ingresar el primer nombre</mat-error
+    >
+  </mat-form-field>
+  <p>Segundo nombre</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el segundo nombre</mat-label>
+    <input matInput [(ngModel)]="data.segundoNombre" />
+  </mat-form-field>
+  <p>Primer apellido</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el primer apellido</mat-label>
+    <input matInput [(ngModel)]="data.primerApellido" required />
+    <mat-error *ngIf="!data.primerApellido"
+      >Debe ingresar el primer apellido</mat-error
+    >
+  </mat-form-field>
+  <p>Segundo apellido</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el primer apellido</mat-label>
+    <input matInput [(ngModel)]="data.segundoApellido" />
+  </mat-form-field>
+  <p>Correo</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el correo</mat-label>
+    <input matInput [(ngModel)]="data.correo" type="email" required />
+    <mat-error *ngIf="!data.correo">Debe ingresar el correo</mat-error>
+  </mat-form-field>
+  <p>Username</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese el username</mat-label>
+    <input matInput [(ngModel)]="data.username" required />
+    <mat-error *ngIf="!data.username">Debe ingresar el username</mat-error>
+  </mat-form-field>
+  <p>Contraseña</p>
+  <mat-form-field appearance="fill" class="fields">
+    <mat-label>Ingrese la contraseña</mat-label>
+    <input matInput [(ngModel)]="data.password" type="password" required />
+    <mat-error *ngIf="!data.password">Debe ingresar la contraseña</mat-error>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="
+        !data.primerNombre ||
+        !data.primerApellido ||
+        !data.username ||
+        !data.password ||
+        !data.correo
+      "
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

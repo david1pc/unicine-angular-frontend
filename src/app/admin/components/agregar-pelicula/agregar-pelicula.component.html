@@ -42,9 +42,9 @@
       <mat-error *ngIf="!data.reparto">Debe ingresar el reparto</mat-error>
     </mat-form-field>
     <p>Estado</p>
-    <mat-slide-toggle [(ngModel)]="data.estado"
-      >Inactivo/Activo</mat-slide-toggle
-    >
+    <mat-slide-toggle [(ngModel)]="data.estado">{{
+      data.estado ? "Cartelera" : "Preventa"
+    }}</mat-slide-toggle>
     <p>Imagen</p>
     <input
       #imgInput
@@ -69,7 +69,7 @@
     <ng-template #ad>
       <button mat-flat-button color="primary" (click)="imgInput.click()">
         {{
-          !data.imagen
+          !data.imagen && !img_seleccionada
             ? "Elegir imagen"
             : "Imagen seleccionada: " +
               (img_seleccionada.length == 0

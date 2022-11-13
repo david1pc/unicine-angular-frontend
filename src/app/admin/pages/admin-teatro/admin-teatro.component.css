@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+.container-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  margin-left: 1.6rem;
+}

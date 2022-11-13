@@ -11,6 +11,12 @@ import { EliminarPeliculaComponent } from './components/eliminar-pelicula/elimin
 import { AgregarCuponComponent } from './components/agregar-cupon/agregar-cupon.component';
 import { EliminarCuponComponent } from './components/eliminar-cupon/eliminar-cupon.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { AdminTeatroComponent } from './pages/admin-teatro/admin-teatro.component';
+import { AgregarAdminTeatroComponent } from './components/agregar-admin-teatro/agregar-admin-teatro.component';
+import { EliminarAdminTeatroComponent } from './components/eliminar-admin-teatro/eliminar-admin-teatro.component';
+import { ConfiteriaComponent } from './pages/confiteria/confiteria.component';
+import { AgregarConfiteriaComponent } from './components/agregar-confiteria/agregar-confiteria.component';
+import { EliminarConfiteriaComponent } from './components/eliminar-confiteria/eliminar-confiteria.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +28,12 @@ import { DialogComponent } from './components/dialog/dialog.component';
     AgregarCuponComponent,
     EliminarCuponComponent,
     DialogComponent,
+    AdminTeatroComponent,
+    AgregarAdminTeatroComponent,
+    EliminarAdminTeatroComponent,
+    ConfiteriaComponent,
+    AgregarConfiteriaComponent,
+    EliminarConfiteriaComponent,
   ],
   imports: [
     CommonModule,

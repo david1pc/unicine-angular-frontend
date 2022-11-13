@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -31,10 +32,19 @@ export class TokenInterceptorService implements HttpInterceptor {
       tap({
         next: () => {},
         error: (err) => {
-          if (err.status == 401) {
+          console.log(err);
+          if (err.error.estadoExpiracion) {
+            Swal.fire({
+              text: err.error.mensaje,
+              title: 'La sesion ha expirado',
+              icon: 'info',
+              didClose() {
+                localStorage.clear();
+                window.location.href = 'http://localhost:4200/';
+              },
+            });
+          } else if (err.status == 401) {
             this.router.navigate(['/error-401']);
-          } else if (err.status == 403) {
-            window.location.href = 'http://localhost:4200/';
           }
         },
       })

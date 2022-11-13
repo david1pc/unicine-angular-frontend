@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   username: string | null = localStorage.getItem('username');
+  rol: string | null = localStorage.getItem('rol');
 
   constructor(private authService: AuthService, private router: Router) {}
 
