@@ -1,6 +1,24 @@
 import { Cupon, Imagen } from 'src/app/admin/interfaces/admin.interface';
 
 export interface Cliente {
+  codigo: number;
+  primerNombre: string;
+  segundoNombre?: string;
+  primerApellido: string;
+  segundoApellido?: string;
+  correo: string;
+  username: string;
+  password: string;
+  cedula: string;
+  estado: boolean;
+  telefonos?: string[];
+  imagen: Imagen;
+  compras?: Compra[];
+  cuponClientes?: CuponCliente[];
+  rol: Rol;
+}
+
+export interface ClienteFile {
   codigo?: number;
   primerNombre: string;
   segundoNombre?: string;
@@ -12,7 +30,8 @@ export interface Cliente {
   cedula: string;
   estado: boolean;
   telefonos?: string[];
-  imagen: File;
+  imagen: Imagen;
+  imagenFile: File;
   compras?: Compra[];
   cuponClientes?: CuponCliente[];
   rol: Rol;

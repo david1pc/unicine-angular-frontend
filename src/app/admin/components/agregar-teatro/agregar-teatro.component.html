@@ -1,0 +1,147 @@
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="adminTeatroFormGroup">
+    <form [formGroup]="adminTeatroFormGroup">
+      <ng-template matStepLabel>Administrador de teatro</ng-template>
+      <div
+        *ngIf="
+          adminTeatroFormGroup.controls['admin'].value.primerNombre !== null &&
+          teatro.direccion.length > 0
+        "
+      >
+        <p class="input-form-step">
+          Admin seleccionado:
+          {{ adminTeatroFormGroup.controls["admin"].value.primerNombre }}
+          {{ adminTeatroFormGroup.controls["admin"].value.primerApellido }}
+        </p>
+      </div>
+      <mat-form-field appearance="fill" class="form-field-gr">
+        <mat-label
+          *ngIf="
+            adminTeatroFormGroup.controls['admin'].value.primerNombre &&
+              teatro.direccion.length > 0;
+            else eq
+          "
+          >Cambiar administrador teatro</mat-label
+        >
+        <ng-template #eq>
+          <mat-label>Seleccionar un administrador teatro</mat-label>
+        </ng-template>
+        <mat-select formControlName="admin" class="input-form-step">
+          <mat-option *ngFor="let ad of administradoresTeatro" [value]="ad">
+            {{ ad.codigo }}. {{ ad.primerNombre }} {{ ad.primerApellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Continuar</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="teatroFormGroup" class="step">
+    <form [formGroup]="teatroFormGroup">
+      <ng-template matStepLabel>Ciudad</ng-template>
+      <div
+        *ngIf="
+          teatroFormGroup.controls['ciudad'].value.nombre &&
+          teatro.direccion.length > 0
+        "
+      >
+        <p class="input-form-step">
+          Ciudad seleccionada:
+          {{ teatroFormGroup.controls["ciudad"].value.nombre }}
+        </p>
+      </div>
+      <mat-form-field appearance="fill" class="form-field-gr">
+        <mat-label
+          *ngIf="
+            teatroFormGroup.controls['ciudad'].value.nombre &&
+              teatro.direccion.length > 0;
+            else cit
+          "
+          >Cambiar ciudad</mat-label
+        >
+        <ng-template #cit>
+          <mat-label>Selecciona una ciudad</mat-label>
+        </ng-template>
+
+        <mat-select formControlName="ciudad" class="input-form-step">
+          <mat-option *ngFor="let c of ciudades" [value]="c">
+            {{ c.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Continuar</button>
+      </div>
+      <mat-step>
+        <ng-template matStepLabel>Direccion</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Direccion</mat-label>
+          <input
+            matInput
+            placeholder="Direccion"
+            formControlName="direccion"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Continuar</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Telefono</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Telefono</mat-label>
+          <input
+            matInput
+            placeholder="Direccion"
+            formControlName="telefono"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Continuar</button>
+        </div>
+      </mat-step>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Finalizar</ng-template>
+    <p>Ahora esta listo para guardar cambios.</p>
+    <div>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button
+        mat-button
+        *ngIf="!teatro.direccion; else edw"
+        (click)="agregar()"
+        type="submit"
+        [disabled]="
+          !teatroFormGroup.controls['ciudad'].value ||
+          !teatroFormGroup.controls['direccion'].value ||
+          !teatroFormGroup.controls['telefono'].value ||
+          !adminTeatroFormGroup.controls['admin'].value
+        "
+      >
+        Agregar
+      </button>
+      <ng-template #edw>
+        <button
+          mat-button
+          (click)="editar()"
+          type="submit"
+          [disabled]="
+            !teatroFormGroup.controls['ciudad'].value ||
+            !teatroFormGroup.controls['direccion'].value ||
+            !teatroFormGroup.controls['telefono'].value ||
+            !adminTeatroFormGroup.controls['admin'].value
+          "
+        >
+          Editar
+        </button>
+      </ng-template>
+    </div>
+  </mat-step>
+</mat-stepper>

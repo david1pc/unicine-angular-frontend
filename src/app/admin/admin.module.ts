@@ -17,6 +17,8 @@ import { EliminarAdminTeatroComponent } from './components/eliminar-admin-teatro
 import { ConfiteriaComponent } from './pages/confiteria/confiteria.component';
 import { AgregarConfiteriaComponent } from './components/agregar-confiteria/agregar-confiteria.component';
 import { EliminarConfiteriaComponent } from './components/eliminar-confiteria/eliminar-confiteria.component';
+import { TeatrosComponent } from './pages/teatros/teatros.component';
+import { AgregarTeatroComponent } from './components/agregar-teatro/agregar-teatro.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { EliminarConfiteriaComponent } from './components/eliminar-confiteria/el
     ConfiteriaComponent,
     AgregarConfiteriaComponent,
     EliminarConfiteriaComponent,
+    TeatrosComponent,
+    AgregarTeatroComponent,
   ],
   imports: [
     CommonModule,

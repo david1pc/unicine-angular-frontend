@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Imagen } from 'src/app/admin/interfaces/admin.interface';
 import Swal from 'sweetalert2';
-import { Cliente, Rol } from '../../interfaces/cliente.interface';
+import { Cliente, ClienteFile, Rol } from '../../interfaces/cliente.interface';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class RegistroComponent implements OnInit {
 
   imagen_nueva!: File;
 
-  nuevoCliente!: Cliente;
+  nuevoCliente!: ClienteFile;
 
   nuevoTelefono: FormControl = this.fb.control('', Validators.required);
 
@@ -82,7 +82,14 @@ export class RegistroComponent implements OnInit {
       nombre: 'ROLE_CLIENTE',
     };
 
-    const cliente: Cliente = {
+    let imagen_d: Imagen = {
+      codigo: 0,
+      imagenId: '',
+      imagenUrl: '',
+      nombre: '',
+    };
+
+    const cliente: ClienteFile = {
       correo: this.miFormulario.controls['correo'].value,
       password: this.miFormulario.controls['password'].value,
       primerNombre: this.miFormulario.controls['primer_nombre'].value,
@@ -94,7 +101,8 @@ export class RegistroComponent implements OnInit {
       username: this.miFormulario.controls['username'].value,
       estado: false,
       telefonos: this.telefonosArr.controls.map((telefono) => telefono.value),
-      imagen: this.imagen_nueva,
+      imagenFile: this.imagen_nueva,
+      imagen: imagen_d,
     };
 
     this.nuevoCliente = cliente;
@@ -131,7 +139,8 @@ export class RegistroComponent implements OnInit {
       rol: rol_a,
       estado: false,
       telefonos: [],
-      imagen: imagen2,
+      imagenFile: imagen2,
+      imagen: imagen_d,
     };
 
     this.telefonosArr.clear();

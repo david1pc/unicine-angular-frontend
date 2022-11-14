@@ -16,6 +16,14 @@ export interface ResultadoConfiteria {
   confiterias: Confiteria[];
 }
 
+export interface ResultadoTeatros {
+  teatros: Teatro[];
+}
+
+export interface ResultadoCiudades {
+  ciudades: Ciudad[];
+}
+
 export interface AdministradorTeatro {
   codigo: number;
   primerNombre: string;
@@ -33,8 +41,15 @@ export interface Teatro {
   codigo: number;
   direccion: string;
   telefono: string;
-  administradorTeatro: AdministradorTeatro;
+  administradorTeatro?: AdministradorTeatro;
+  salas: Sala[];
   ciudad: Ciudad;
+}
+
+export interface Sala {
+  codigo: number;
+  nombre: string;
+  funciones: Funcion[];
 }
 
 export interface Ciudad {
@@ -84,6 +99,7 @@ export interface Imagen {
 export interface Funcion {
   codigo: number;
   precio: number;
+  sala: Sala;
   compras: Compra[];
 }
 

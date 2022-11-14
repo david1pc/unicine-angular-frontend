@@ -5,6 +5,7 @@ import { ConfiteriaComponent } from './pages/confiteria/confiteria.component';
 import { CuponesComponent } from './pages/cupones/cupones.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListadoPeliculasComponent } from './pages/listado-peliculas/listado-peliculas.component';
+import { TeatrosComponent } from './pages/teatros/teatros.component';
 
 const rutas: Routes = [
   {
@@ -26,6 +27,10 @@ const rutas: Routes = [
       {
         path: 'confiteria',
         component: ConfiteriaComponent,
+      },
+      {
+        path: 'teatros',
+        component: TeatrosComponent,
       },
       {
         path: '**',
