@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 mat-dialog-title class="header">
+    <mat-icon>warning</mat-icon>Eliminar salas
+  </h1>
+  <p>¿Desea continuar con el proceso?</p>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="estadoConfirmacion"
+      (click)="cambiarEstado()"
+      cdkFocusInitial
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

@@ -68,6 +68,9 @@ export class CuponesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Cupon) => {
+      if (!result) {
+        return;
+      }
       this.adminService.agregarCupon(result).subscribe({
         next: (resp: any) => {
           this.ngOnInit();
@@ -122,6 +125,9 @@ export class CuponesComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result: Cupon) => {
+        if (!result) {
+          return;
+        }
         this.adminService.editarCupon(result).subscribe({
           next: (resp: any) => {
             let dialog: Dialog = {

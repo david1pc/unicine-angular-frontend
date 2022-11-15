@@ -1,0 +1,62 @@
+<div class="container">
+  <h1 mat-dialog-title>{{ data.codigo ? "Editar" : "Agregar nueva" }} sala</h1>
+  <div mat-dialog-content class="container">
+    <p>Nombre</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" required />
+      <mat-error *ngIf="!data.nombre">Debe ingresar el nombre</mat-error>
+    </mat-form-field>
+    <p class="input-title">Distribucion de sillas</p>
+    <div *ngIf="data.distribucionSillas?.esquema">
+      <p class="input-form-step">
+        Distribucion seleccionada:
+        {{ data.distribucionSillas.codigo }}.
+        {{ data.distribucionSillas.esquema }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la distribucion de sillas</mat-label>
+      <mat-select
+        [(ngModel)]="data.distribucionSillas"
+        name="distribucionSillas"
+        required
+      >
+        <mat-option *ngFor="let d of distribucionesSillas" [value]="d">
+          {{ d.codigo }}. {{ d.esquema }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.distribucionSillas"
+        >Debe ingresar la distribucion de sillas</mat-error
+      >
+    </mat-form-field>
+    <p class="input-title">Teatro</p>
+    <div *ngIf="data.teatro">
+      <p class="input-form-step">
+        Teatro seleccionado:
+        {{ data.teatro.codigo }}.
+        {{ data.teatro["direccion"] }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione el teatro</mat-label>
+      <mat-select [(ngModel)]="data.teatro" name="teatro" required>
+        <mat-option *ngFor="let te of teatros" [value]="te">
+          {{ te.codigo }} {{ te.direccion }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.teatro">Debe ingresar el teatro</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="!data.nombre || !data.distribucionSillas || !data.teatro"
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

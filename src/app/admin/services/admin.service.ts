@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 import {
   AdministradorTeatro,
+  Combo,
+  ComboFile,
   Confiteria,
   ConfiteriaFile,
   Cupon,
@@ -12,6 +14,7 @@ import {
   Pelicula,
   PeliculaFile,
   ResultadoAdminsTeatro,
+  ResultadoCombos,
   ResultadoConfiteria,
   ResultadoCupones,
   ResultadoPeliculas,
@@ -246,6 +249,71 @@ export class AdminService {
     return this.http.post<any>(
       `${this.base_url}/admin/confiteria/eliminar`,
       ids_confiterias
+    );
+  }
+
+  listarCombos(): Observable<ResultadoCombos> {
+    return this.http.get<ResultadoCombos>(`${this.base_url}/admin/combos`);
+  }
+
+  agregarCombo(combo: ComboFile) {
+    let imagen_d!: Imagen;
+    let combo_nuevo: Combo = {
+      codigo: 0,
+      descripcion: combo.descripcion,
+      imagen: imagen_d,
+      nombre: combo.nombre,
+      precio: combo.precio,
+      compraCombos: [],
+    };
+
+    let file: File = combo.imagenFile;
+    if (!file) {
+      file = new File([], '');
+    }
+    const fd = new FormData();
+    fd.append('imagen', file);
+    fd.append(
+      'combo',
+      new Blob([JSON.stringify(combo_nuevo)], {
+        type: 'application/json',
+      })
+    );
+    return this.http.post<Confiteria>(`${this.base_url}/admin/combos/`, fd);
+  }
+
+  editarCombo(combo: ComboFile) {
+    let nuevo: Combo = {
+      codigo: combo.codigo,
+      nombre: combo.nombre,
+      descripcion: combo.descripcion,
+      precio: combo.precio,
+      imagen: combo.imagen,
+      compraCombos: combo.compraCombos,
+    };
+
+    let file: File = combo.imagenFile;
+
+    if (!file) {
+      file = new File([], '');
+    }
+
+    const fd = new FormData();
+    fd.append('imagen', file);
+    fd.append(
+      'combo',
+      new Blob([JSON.stringify(nuevo)], {
+        type: 'application/json',
+      })
+    );
+
+    return this.http.put<Confiteria>(`${this.base_url}/admin/combos/`, fd);
+  }
+
+  eliminarCombo(combos_ids: number[]) {
+    return this.http.post<any>(
+      `${this.base_url}/admin/combos/eliminar`,
+      combos_ids
     );
   }
 }

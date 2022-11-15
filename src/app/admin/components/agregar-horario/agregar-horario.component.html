@@ -1,0 +1,44 @@
+<div class="container">
+  <h1 mat-dialog-title>
+    {{ data.codigo ? "Editar" : "Agregar nuevo" }} horario
+  </h1>
+  <div mat-dialog-content class="container">
+    <p>Hora</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la hora</mat-label>
+      <input matInput [(ngModel)]="data.hora" type="time" required />
+      <mat-error *ngIf="!data.hora">Debe ingresar la hora</mat-error>
+    </mat-form-field>
+    <p>Dia</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el dia(L M MI J V S D)</mat-label>
+      <input matInput [(ngModel)]="data.dia" required />
+      <mat-error *ngIf="!data.dia">Debe ingresar el dia</mat-error>
+    </mat-form-field>
+    <p>Fecha de inicio</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la fecha de inicio</mat-label>
+      <input matInput [(ngModel)]="data.fecha_inicio" type="date" required />
+      <mat-error *ngIf="!data.hora">Debe ingresar la fecha de inicio</mat-error>
+    </mat-form-field>
+    <p>Fecha de fin</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la fecha de fin</mat-label>
+      <input matInput [(ngModel)]="data.fecha_fin" type="date" required />
+      <mat-error *ngIf="!data.hora">Debe ingresar la fecha de fin</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="
+        !data.hora || !data.dia || !data.fecha_inicio || !data.fecha_fin
+      "
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

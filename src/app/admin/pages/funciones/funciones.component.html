@@ -1,0 +1,79 @@
+<div class="demo-button-container container-button">
+  <button mat-raised-button (click)="agregar(null)" class="btn" color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-raised-button (click)="editar(null)" class="btn" color="accent">
+    <mat-icon>create</mat-icon>
+  </button>
+  <button
+    mat-raised-button
+    [disabled]="!dataSource"
+    (click)="eliminar()"
+    class="btn"
+    color="warn"
+  >
+    <mat-icon>delete_sweep</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 fullscreen">
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox
+        (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()"
+        [aria-label]="checkboxLabel()"
+      >
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)"
+        [aria-label]="checkboxLabel(row)"
+      >
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="codigo">
+    <th mat-header-cell *matHeaderCellDef>Codigo</th>
+    <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="precio">
+    <th mat-header-cell *matHeaderCellDef>Precio</th>
+    <td mat-cell *matCellDef="let element">{{ element.precio }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sala">
+    <th mat-header-cell *matHeaderCellDef>Sala(codigo y nombre)</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.sala["codigo"] }}. {{ element.sala["nombre"] }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="horario">
+    <th mat-header-cell *matHeaderCellDef>Horario(codigo, hora y dia)</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.horario["codigo"] }}. {{ element.horario["hora"] }}
+      {{ element.horario["dia"] }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pelicula">
+    <th mat-header-cell *matHeaderCellDef>Pelicula(codigo y nombre)</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.pelicula["codigo"] }}. {{ element.pelicula["nombre"] }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    (click)="selection.toggle(row)"
+  ></tr>
+</table>

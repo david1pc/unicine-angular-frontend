@@ -19,6 +19,22 @@ import { AgregarConfiteriaComponent } from './components/agregar-confiteria/agre
 import { EliminarConfiteriaComponent } from './components/eliminar-confiteria/eliminar-confiteria.component';
 import { TeatrosComponent } from './pages/teatros/teatros.component';
 import { AgregarTeatroComponent } from './components/agregar-teatro/agregar-teatro.component';
+import { EliminarTeatroComponent } from './components/eliminar-teatro/eliminar-teatro.component';
+import { CombosComponent } from './pages/combos/combos.component';
+import { AgregarComboComponent } from './components/agregar-combo/agregar-combo.component';
+import { EliminarComboComponent } from './components/eliminar-combo/eliminar-combo.component';
+import { SalasComponent } from './pages/salas/salas.component';
+import { AgregarSalaComponent } from './components/agregar-sala/agregar-sala.component';
+import { EliminarSalaComponent } from './components/eliminar-sala/eliminar-sala.component';
+import { DistribucionesSillasComponent } from './pages/distribuciones-sillas/distribuciones-sillas.component';
+import { AgregarDistribucionSillaComponent } from './components/agregar-distribucion-silla/agregar-distribucion-silla.component';
+import { EliminarDistribucionSillasComponent } from './components/eliminar-distribucion-sillas/eliminar-distribucion-sillas.component';
+import { HorariosComponent } from './pages/horarios/horarios.component';
+import { AgregarHorarioComponent } from './components/agregar-horario/agregar-horario.component';
+import { EliminarHorarioComponent } from './components/eliminar-horario/eliminar-horario.component';
+import { FuncionesComponent } from './pages/funciones/funciones.component';
+import { AgregarFuncionComponent } from './components/agregar-funcion/agregar-funcion.component';
+import { EliminarFuncionComponent } from './components/eliminar-funcion/eliminar-funcion.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +54,22 @@ import { AgregarTeatroComponent } from './components/agregar-teatro/agregar-teat
     EliminarConfiteriaComponent,
     TeatrosComponent,
     AgregarTeatroComponent,
+    EliminarTeatroComponent,
+    CombosComponent,
+    AgregarComboComponent,
+    EliminarComboComponent,
+    SalasComponent,
+    AgregarSalaComponent,
+    EliminarSalaComponent,
+    DistribucionesSillasComponent,
+    AgregarDistribucionSillaComponent,
+    EliminarDistribucionSillasComponent,
+    HorariosComponent,
+    AgregarHorarioComponent,
+    EliminarHorarioComponent,
+    FuncionesComponent,
+    AgregarFuncionComponent,
+    EliminarFuncionComponent,
   ],
   imports: [
     CommonModule,

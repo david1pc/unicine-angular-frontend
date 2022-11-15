@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 mat-dialog-title>
+    {{ data.codigo ? "Editar" : "Agregar nueva" }} distribucion de sillas
+  </h1>
+  <div mat-dialog-content class="container">
+    <p>Esquema</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el esquema</mat-label>
+      <input matInput [(ngModel)]="data.esquema" required />
+      <mat-error *ngIf="!data.esquema">Debe ingresar el esquema</mat-error>
+    </mat-form-field>
+    <p>Filas</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese las filas</mat-label>
+      <input matInput [(ngModel)]="data.filas" required />
+      <mat-error *ngIf="!data.filas">Debe ingresar las filas</mat-error>
+    </mat-form-field>
+    <p>Columnas</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese las columnas</mat-label>
+      <input matInput [(ngModel)]="data.columnas" required />
+      <mat-error *ngIf="!data.columnas">Debe ingresar las columnas</mat-error>
+    </mat-form-field>
+    <p>Total de sillas</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese las columnas</mat-label>
+      <input matInput [(ngModel)]="data.total_sillas" required />
+      <mat-error *ngIf="!data.total_sillas"
+        >Debe ingresar el total de sillas</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="
+        !data.esquema || !data.filas || !data.columnas || !data.total_sillas
+      "
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

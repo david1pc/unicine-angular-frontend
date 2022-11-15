@@ -1,0 +1,75 @@
+<div class="container">
+  <h1 mat-dialog-title>{{ data.codigo ? "Editar" : "Agregar nueva" }} sala</h1>
+  <div mat-dialog-content class="container">
+    <p>Precio</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el precio</mat-label>
+      <input matInput [(ngModel)]="data.precio" type="number" required />
+      <mat-error *ngIf="!data.precio">Debe ingresar el precio</mat-error>
+    </mat-form-field>
+    <p class="input-title">Sala</p>
+    <div *ngIf="data.sala?.nombre">
+      <p class="input-form-step">
+        Sala seleccionada:
+        {{ data.sala.codigo }}.
+        {{ data.sala.nombre }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la sala</mat-label>
+      <mat-select [(ngModel)]="data.sala" name="sala" required>
+        <mat-option *ngFor="let s of salas" [value]="s">
+          {{ s.codigo }}. {{ s.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.sala">Debe ingresar la sala</mat-error>
+    </mat-form-field>
+    <p class="input-title">Horario</p>
+    <div *ngIf="data.horario">
+      <p class="input-form-step">
+        Horario seleccionado:
+        {{ data.horario.codigo }}.
+        {{ data.horario["hora"] }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione el horario</mat-label>
+      <mat-select [(ngModel)]="data.horario" name="horario" required>
+        <mat-option *ngFor="let h of horarios" [value]="h">
+          {{ h.codigo }}. Hora: {{ h.hora }} --- Dia: {{ h.dia }} --- Fecha
+          inicio/fin: {{ h.fecha_inicio }} -
+          {{ h.fecha_fin }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.horario">Debe ingresar el horario</mat-error>
+    </mat-form-field>
+    <p class="input-title">Pelicula</p>
+    <div *ngIf="data.pelicula">
+      <p class="input-form-step">
+        Horario seleccionado:
+        {{ data.pelicula.codigo }}.
+        {{ data.pelicula["nombre"] }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Seleccione la pelicula</mat-label>
+      <mat-select [(ngModel)]="data.pelicula" name="pelicula" required>
+        <mat-option *ngFor="let p of peliculas" [value]="p">
+          {{ p.codigo }} {{ p.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.pelicula">Debe ingresar la pelicula</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="!data.precio || !data.sala || !data.pelicula || !data.horario"
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

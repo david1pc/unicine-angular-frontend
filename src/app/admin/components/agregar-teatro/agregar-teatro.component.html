@@ -1,147 +1,75 @@
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="adminTeatroFormGroup">
-    <form [formGroup]="adminTeatroFormGroup">
-      <ng-template matStepLabel>Administrador de teatro</ng-template>
-      <div
-        *ngIf="
-          adminTeatroFormGroup.controls['admin'].value.primerNombre !== null &&
-          teatro.direccion.length > 0
-        "
+<div class="container">
+  <h1 mat-dialog-title>
+    {{ data.codigo ? "Editar" : "Agregar nuevo" }} teatro
+  </h1>
+  <div mat-dialog-content class="container">
+    <p>Direccion</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la direccion</mat-label>
+      <input matInput [(ngModel)]="data.direccion" required />
+      <mat-error *ngIf="!data.direccion"
+        >Debe ingresar la descripcion</mat-error
       >
-        <p class="input-form-step">
-          Admin seleccionado:
-          {{ adminTeatroFormGroup.controls["admin"].value.primerNombre }}
-          {{ adminTeatroFormGroup.controls["admin"].value.primerApellido }}
-        </p>
-      </div>
-      <mat-form-field appearance="fill" class="form-field-gr">
-        <mat-label
-          *ngIf="
-            adminTeatroFormGroup.controls['admin'].value.primerNombre &&
-              teatro.direccion.length > 0;
-            else eq
-          "
-          >Cambiar administrador teatro</mat-label
-        >
-        <ng-template #eq>
-          <mat-label>Seleccionar un administrador teatro</mat-label>
-        </ng-template>
-        <mat-select formControlName="admin" class="input-form-step">
-          <mat-option *ngFor="let ad of administradoresTeatro" [value]="ad">
-            {{ ad.codigo }}. {{ ad.primerNombre }} {{ ad.primerApellido }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Continuar</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="teatroFormGroup" class="step">
-    <form [formGroup]="teatroFormGroup">
-      <ng-template matStepLabel>Ciudad</ng-template>
-      <div
-        *ngIf="
-          teatroFormGroup.controls['ciudad'].value.nombre &&
-          teatro.direccion.length > 0
-        "
-      >
-        <p class="input-form-step">
-          Ciudad seleccionada:
-          {{ teatroFormGroup.controls["ciudad"].value.nombre }}
-        </p>
-      </div>
-      <mat-form-field appearance="fill" class="form-field-gr">
-        <mat-label
-          *ngIf="
-            teatroFormGroup.controls['ciudad'].value.nombre &&
-              teatro.direccion.length > 0;
-            else cit
-          "
-          >Cambiar ciudad</mat-label
-        >
-        <ng-template #cit>
-          <mat-label>Selecciona una ciudad</mat-label>
-        </ng-template>
-
-        <mat-select formControlName="ciudad" class="input-form-step">
-          <mat-option *ngFor="let c of ciudades" [value]="c">
-            {{ c.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext>Continuar</button>
-      </div>
-      <mat-step>
-        <ng-template matStepLabel>Direccion</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Direccion</mat-label>
-          <input
-            matInput
-            placeholder="Direccion"
-            formControlName="direccion"
-            required
-          />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext>Continuar</button>
-        </div>
-      </mat-step>
-      <mat-step>
-        <ng-template matStepLabel>Telefono</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Telefono</mat-label>
-          <input
-            matInput
-            placeholder="Direccion"
-            formControlName="telefono"
-            required
-          />
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext>Continuar</button>
-        </div>
-      </mat-step>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Finalizar</ng-template>
-    <p>Ahora esta listo para guardar cambios.</p>
-    <div>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button
-        mat-button
-        *ngIf="!teatro.direccion; else edw"
-        (click)="agregar()"
-        type="submit"
-        [disabled]="
-          !teatroFormGroup.controls['ciudad'].value ||
-          !teatroFormGroup.controls['direccion'].value ||
-          !teatroFormGroup.controls['telefono'].value ||
-          !adminTeatroFormGroup.controls['admin'].value
-        "
-      >
-        Agregar
-      </button>
-      <ng-template #edw>
-        <button
-          mat-button
-          (click)="editar()"
-          type="submit"
-          [disabled]="
-            !teatroFormGroup.controls['ciudad'].value ||
-            !teatroFormGroup.controls['direccion'].value ||
-            !teatroFormGroup.controls['telefono'].value ||
-            !adminTeatroFormGroup.controls['admin'].value
-          "
-        >
-          Editar
-        </button>
-      </ng-template>
+    </mat-form-field>
+    <p>Telefono</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el telefono</mat-label>
+      <input matInput [(ngModel)]="data.telefono" required />
+      <mat-error *ngIf="!data.telefono">Debe ingresar el telefono</mat-error>
+    </mat-form-field>
+    <p class="input-title">Administrador teatro</p>
+    <div *ngIf="data.administradorTeatro?.primerNombre">
+      <p class="input-form-step">
+        Admin teatro seleccionado:
+        {{ data.administradorTeatro?.primerNombre }}
+      </p>
     </div>
-  </mat-step>
-</mat-stepper>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese el administrador de teatro</mat-label>
+      <mat-select
+        [(ngModel)]="data.administradorTeatro"
+        name="administradorTeatro"
+        required
+      >
+        <mat-option *ngFor="let admin of administradoresTeatro" [value]="admin">
+          {{ admin.codigo }} {{ admin.primerNombre }} {{ admin.primerApellido }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.administradorTeatro"
+        >Debe ingresar el administrador de teatro</mat-error
+      >
+    </mat-form-field>
+    <p class="input-title">Ciudad</p>
+    <div *ngIf="data.ciudad.nombre">
+      <p class="input-form-step">
+        Ciudad seleccionada:
+        {{ data.ciudad.nombre }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrese la ciudad</mat-label>
+      <mat-select [(ngModel)]="data.ciudad" name="ciudad" required>
+        <mat-option *ngFor="let c of ciudades" [value]="c">
+          {{ c.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!data.ciudad">Debe ingresar la ciudad</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="
+        !data.direccion ||
+        !data.telefono ||
+        !data.administradorTeatro ||
+        !data.ciudad
+      "
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

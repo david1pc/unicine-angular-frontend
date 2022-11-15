@@ -1,0 +1,78 @@
+<div class="container">
+  <h1 mat-dialog-title>
+    {{ data.codigo ? "Editar" : "Agregar nuevo" }} combo
+  </h1>
+  <div mat-dialog-content class="container" class="fields">
+    <p>Nombre</p>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Ingrese el nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" required />
+      <mat-error *ngIf="!data.nombre">Debe ingresar un nombre</mat-error>
+    </mat-form-field>
+    <p>Precio</p>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Ingrese el precio</mat-label>
+      <input matInput [(ngModel)]="data.precio" required />
+      <mat-error *ngIf="!data.precio">Debe ingresar el precio</mat-error>
+    </mat-form-field>
+    <p>Descripcion</p>
+    <mat-form-field appearance="fill" class="fields">
+      <mat-label>Ingrese la descripcion</mat-label>
+      <input matInput [(ngModel)]="data.descripcion" required />
+      <mat-error *ngIf="!data.descripcion"
+        >Debe ingresar la descripcion</mat-error
+      >
+    </mat-form-field>
+    <p>Imagen</p>
+    <input
+      #imgInput
+      hidden="true"
+      class="fields"
+      type="file"
+      onclick="this.value=null"
+      (change)="onFileSelected($event)"
+      accept=".jpg, .png, .jpeg"
+    />
+    <button
+      mat-flat-button
+      color="primary"
+      class="fields"
+      (click)="imgInput.click()"
+      *ngIf="!data.codigo; else ad"
+    >
+      {{
+        img_seleccionada.length == 0
+          ? "Elegir imagen"
+          : "Imagen seleccionada: " + img_seleccionada
+      }}
+    </button>
+    <ng-template #ad>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="imgInput.click()"
+        class="fields"
+      >
+        {{
+          !data.imagen && !img_seleccionada
+            ? "Elegir imagen"
+            : "Imagen seleccionada: " +
+              (img_seleccionada.length == 0
+                ? data.imagen.nombre
+                : img_seleccionada)
+        }}
+      </button>
+    </ng-template>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      [disabled]="!data.nombre || !data.descripcion || !data.precio"
+    >
+      Confirmar
+    </button>
+  </div>
+</div>

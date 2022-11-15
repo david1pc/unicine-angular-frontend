@@ -2,9 +2,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { AgregarTeatroComponent } from '../../components/agregar-teatro/agregar-teatro.component';
 import { DialogComponent } from '../../components/dialog/dialog.component';
-import { Dialog, Teatro } from '../../interfaces/admin.interface';
+import { EliminarTeatroComponent } from '../../components/eliminar-teatro/eliminar-teatro.component';
+import { Ciudad, Dialog, Teatro } from '../../interfaces/admin.interface';
 import { AdminTeatroService } from '../../services/admin-teatro.service';
 
 @Component({
@@ -24,26 +25,17 @@ export class TeatrosComponent implements OnInit {
     'ciudad',
   ];
 
-  tabs = ['Ver teatros', 'Teatro'];
-  selected: number = 0;
-
   dataSource!: MatTableDataSource<Teatro>;
   selection = new SelectionModel<Teatro>(true, []);
 
   constructor(
     private adminTeatroService: AdminTeatroService,
     public dialog: MatDialog
-  ) {
-    this.adminTeatroService.ultimaSeleccion.subscribe((seleccion) => {
-      if (seleccion != this.selected) {
-        this.selected = seleccion;
-        this.buscarTeatros();
-      }
-      this.buscarTeatros();
-    });
-  }
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buscarTeatros();
+  }
 
   buscarTeatros() {
     this.adminTeatroService.listarTeatros().subscribe((resultado) => {
@@ -52,19 +44,98 @@ export class TeatrosComponent implements OnInit {
     });
   }
 
-  actualizarSeleccion(event: any) {
-    this.selected = 0;
-  }
-
   agregar() {
-    this.selected = 1;
+    let ciudad: Ciudad = {
+      codigo: 0,
+      nombre: '',
+    };
+
+    let codigo = 0;
+    let direccion = '';
+    let telefono = '';
+
+    const dialogRef = this.dialog.open(AgregarTeatroComponent, {
+      width: '50%',
+      data: {
+        ciudad: ciudad,
+        codigo: codigo,
+        direccion: direccion,
+        telefono: telefono,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: Teatro) => {
+      if (!result) {
+        return;
+      }
+      this.adminTeatroService.agregarTeatro(result).subscribe({
+        next: (resp: any) => {
+          this.ngOnInit();
+          let dialog: Dialog = {
+            titulo: 'Crear teatro',
+            descripcion: resp.mensaje,
+            icono: 'done',
+            estado: false,
+          };
+
+          this.abrirDialog(dialog);
+        },
+        error: (err) => {
+          let dialog: Dialog = {
+            titulo: err.mensaje,
+            icono: 'error',
+            descripcion: err.error,
+            estado: false,
+          };
+
+          this.abrirDialog(dialog);
+        },
+      });
+    });
   }
 
   editar() {
     if (this.selection.selected.length == 1) {
       this.teatroSeleccionado = this.selection.selected[0];
-      this.selected = 1;
-      this.adminTeatroService.cambiarEdicionTeatro(this.teatroSeleccionado);
+      const dialogRef = this.dialog.open(AgregarTeatroComponent, {
+        width: '50%',
+        data: {
+          ciudad: this.teatroSeleccionado.ciudad,
+          direccion: this.teatroSeleccionado.direccion,
+          telefono: this.teatroSeleccionado.telefono,
+          administradorTeatro: this.teatroSeleccionado.administradorTeatro,
+          codigo: this.teatroSeleccionado.codigo,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result: Teatro) => {
+        if (!result) {
+          return;
+        }
+        this.adminTeatroService.editarTeatroExistente(result).subscribe({
+          next: (resp: any) => {
+            let dialog: Dialog = {
+              titulo: 'Actualizar teatro',
+              icono: 'done',
+              descripcion: resp.mensaje,
+              estado: false,
+            };
+            this.abrirDialog(dialog);
+            this.ngOnInit();
+            this.selection.clear();
+          },
+          error: (err) => {
+            let dialog: Dialog = {
+              titulo: err.mensaje,
+              icono: 'error',
+              descripcion: err.error,
+              estado: false,
+            };
+
+            this.abrirDialog(dialog);
+          },
+        });
+      });
     } else {
       let dialog: Dialog = {
         titulo: 'Error al editar el teatro',
@@ -75,8 +146,60 @@ export class TeatrosComponent implements OnInit {
 
       this.abrirDialog(dialog);
     }
+  }
 
-    this.selection.clear();
+  eliminar() {
+    let ids_teatros: number[] = [];
+    this.selection.selected.map((element) => {
+      ids_teatros.push(element.codigo);
+    });
+
+    if (ids_teatros.length == 0) {
+      let dialog: Dialog = {
+        titulo: 'Error al eliminar el teatro',
+        descripcion: 'Debe seleccionar un teatro',
+        estado: false,
+        icono: 'error',
+      };
+
+      this.abrirDialog(dialog);
+      return;
+    }
+
+    const dialogRef = this.dialog.open(EliminarTeatroComponent, {
+      width: '35%',
+      data: { estadoConfirmacion: false },
+    });
+
+    dialogRef.afterClosed().subscribe((estadoConfirmacion: Boolean) => {
+      if (estadoConfirmacion) {
+        this.adminTeatroService.eliminarTeatros(ids_teatros).subscribe({
+          next: (resp) => {
+            let dialog: Dialog = {
+              titulo: 'Eliminar teatro',
+              descripcion: resp.mensaje,
+              icono: 'done',
+              estado: false,
+            };
+            this.abrirDialog(dialog);
+            this.ngOnInit();
+            this.selection.clear();
+          },
+          error: (resp) => {
+            let dialog: Dialog = {
+              titulo: resp.error.mensaje,
+              descripcion: resp.error.error,
+              icono: 'error',
+              estado: false,
+            };
+            this.abrirDialog(dialog);
+
+            this.ngOnInit();
+            this.selection.clear();
+          },
+        });
+      }
+    });
   }
 
   abrirDialog(dialog: Dialog) {
@@ -94,11 +217,6 @@ export class TeatrosComponent implements OnInit {
       return dialog.estado;
     });
   }
-  saludar() {
-    console.log('holaa');
-  }
-
-  eliminar() {}
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

@@ -91,6 +91,9 @@ export class AdminTeatroComponent implements OnInit {
     }
 
     dialogRef.afterClosed().subscribe((result: any) => {
+      if (!result) {
+        return;
+      }
       this.adminService.agregarAdminTeatro(result).subscribe({
         next: (resp: any) => {
           this.ngOnInit();
@@ -150,6 +153,9 @@ export class AdminTeatroComponent implements OnInit {
         });
       }
       dialogRef.afterClosed().subscribe((result: any) => {
+        if (!result) {
+          return;
+        }
         this.adminService.editarAdminTeatro(result).subscribe({
           next: (resp: any) => {
             this.ngOnInit();

@@ -8,6 +8,10 @@ export interface ResultadoCupones {
   cupones: Cupon[];
 }
 
+export interface ResultadoSalas {
+  salas: Sala[];
+}
+
 export interface ResultadoAdminsTeatro {
   administradorTeatro: AdministradorTeatro[];
 }
@@ -22,6 +26,26 @@ export interface ResultadoTeatros {
 
 export interface ResultadoCiudades {
   ciudades: Ciudad[];
+}
+
+export interface ResultadoCombos {
+  combos: Combo[];
+}
+
+export interface ResultadoHorarios {
+  horarios: Horario[];
+}
+
+export interface ResultadoFunciones {
+  funciones: Funcion[];
+}
+
+export interface Horario {
+  codigo: number;
+  hora: Date;
+  dia: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
 }
 
 export interface AdministradorTeatro {
@@ -49,12 +73,41 @@ export interface Teatro {
 export interface Sala {
   codigo: number;
   nombre: string;
-  funciones: Funcion[];
+  distribucionSillas: DistribucionSillas;
+  teatro: Teatro;
+  funciones?: Funcion[];
+}
+
+export interface DistribucionSillas {
+  codigo: number;
+  esquema: string;
+  total_sillas: number;
+  filas: number;
+  columnas: number;
 }
 
 export interface Ciudad {
   codigo: number;
   nombre: string;
+}
+
+export interface Combo {
+  codigo: number;
+  nombre: string;
+  precio: number;
+  descripcion: string;
+  imagen: Imagen;
+  compraCombos?: CompraCombo[];
+}
+
+export interface ComboFile {
+  codigo: number;
+  nombre: string;
+  precio: number;
+  descripcion: string;
+  imagen: Imagen;
+  imagenFile: File;
+  compraCombos?: CompraCombo[];
 }
 
 export interface Pelicula {
@@ -100,7 +153,9 @@ export interface Funcion {
   codigo: number;
   precio: number;
   sala: Sala;
-  compras: Compra[];
+  horario: Horario;
+  pelicula: Pelicula;
+  compras?: Compra[];
 }
 
 export interface Compra {
@@ -125,14 +180,6 @@ export interface CompraCombo {
   precio: number;
   compra: Compra;
   combo: Combo;
-}
-
-export interface Combo {
-  codigo: number;
-  nombre: string;
-  precio: number;
-  descripcion: string;
-  imagen: string;
 }
 
 export interface Entrada {

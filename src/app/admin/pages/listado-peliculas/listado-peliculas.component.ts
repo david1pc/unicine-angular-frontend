@@ -90,6 +90,9 @@ export class ListadoPeliculasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: PeliculaFile) => {
+      if (!result) {
+        return;
+      }
       this.adminService.agregarPelicula(result).subscribe({
         next: (resp: any) => {
           this.ngOnInit();
@@ -168,6 +171,9 @@ export class ListadoPeliculasComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result: PeliculaFile) => {
+        if (!result) {
+          return;
+        }
         this.adminService.editarPelicula(result).subscribe({
           next: (resp: any) => {
             let dialog: Dialog = {

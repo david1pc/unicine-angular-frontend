@@ -6,7 +6,6 @@ import { AgregarConfiteriaComponent } from '../../components/agregar-confiteria/
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { EliminarConfiteriaComponent } from '../../components/eliminar-confiteria/eliminar-confiteria.component';
 import {
-  CompraConfiteria,
   Confiteria,
   ConfiteriaFile,
   Dialog,
@@ -66,6 +65,9 @@ export class ConfiteriaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: ConfiteriaFile) => {
+      if (!result) {
+        return;
+      }
       this.adminService.agregarConfiteria(result).subscribe({
         next: (resp: any) => {
           let dialog: Dialog = {
@@ -122,6 +124,9 @@ export class ConfiteriaComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result: ConfiteriaFile) => {
+        if (!result) {
+          return;
+        }
         this.adminService.editarConfiteria(result).subscribe({
           next: (resp: any) => {
             let dialog: Dialog = {
