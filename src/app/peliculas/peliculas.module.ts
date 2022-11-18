@@ -6,6 +6,7 @@ import { PeliculasRoutingModule } from './peliculas-routing.module';
 import { PeliculaComponent } from './pages/pelicula/pelicula.component';
 import { SharedModule } from '../shared/shared.module';
 import { CarteleraPeliculaCardComponent } from './components/cartelera-pelicula-card/cartelera-pelicula-card.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { CarteleraPeliculaCardComponent } from './components/cartelera-pelicula-
     PeliculaCardComponent,
     PeliculaComponent,
     CarteleraPeliculaCardComponent,
+    SliderComponent,
   ],
   imports: [CommonModule, PeliculasRoutingModule, SharedModule],
 })

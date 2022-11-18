@@ -32,7 +32,7 @@ export class TokenInterceptorService implements HttpInterceptor {
       tap({
         next: () => {},
         error: (err) => {
-          console.log(err);
+          console.log(err.error.estadoExpiracion);
           if (err.error.estadoExpiracion) {
             Swal.fire({
               text: err.error.mensaje,

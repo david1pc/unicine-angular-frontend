@@ -99,6 +99,7 @@ export class DistribucionesSillasComponent implements OnInit {
   editar() {
     if (this.selection.selected.length == 1) {
       this.distribucionSeleccionada = this.selection.selected[0];
+      console.log(this.distribucionSeleccionada.total_sillas);
       const dialogRef = this.dialog.open(AgregarDistribucionSillaComponent, {
         width: '50%',
         data: {

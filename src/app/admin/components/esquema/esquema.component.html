@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="grid" #grid [style.--columns]="gridColumns">
+    <div class="filas" *ngFor="let item of dataF">
+      <button
+        class="btn-silla"
+        id="{{ item.f }},{{ item.columna }}"
+        #silla
+        [ngClass]="{ 'btn-green': item.ind === '-' }"
+        [style.--colorSilla]="colorSilla"
+        (click)="cambiarColor($event)"
+      >
+        {{ item.fila }} {{ item.columna }}
+      </button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="habilitado">
+      <p class="p-title">Habilitado</p>
+    </div>
+    <div class="deshabilitado">
+      <p class="p-title">Deshabilitado</p>
+    </div>
+    <button
+      mat-button
+      [mat-dialog-close]="data"
+      cdkFocusInitial
+      (click)="guardar()"
+    >
+      Guardar
+    </button>
+  </div>
+</div>

@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './auth/services/token-interceptor.service';
-import { AdminService } from './admin/services/admin.service';
 
 @NgModule({
   declarations: [AppComponent],

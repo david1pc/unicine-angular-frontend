@@ -35,6 +35,7 @@ import { EliminarHorarioComponent } from './components/eliminar-horario/eliminar
 import { FuncionesComponent } from './pages/funciones/funciones.component';
 import { AgregarFuncionComponent } from './components/agregar-funcion/agregar-funcion.component';
 import { EliminarFuncionComponent } from './components/eliminar-funcion/eliminar-funcion.component';
+import { EsquemaComponent } from './components/esquema/esquema.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { EliminarFuncionComponent } from './components/eliminar-funcion/eliminar
     FuncionesComponent,
     AgregarFuncionComponent,
     EliminarFuncionComponent,
+    EsquemaComponent,
   ],
   imports: [
     CommonModule,

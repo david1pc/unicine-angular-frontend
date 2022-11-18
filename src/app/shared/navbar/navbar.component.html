@@ -29,7 +29,12 @@
         <a routerLink="/auth/login" class="main-nav-link nav-cta">Login</a>
       </li>
       <li *ngIf="username" class="login-confirm">
-        <a routerLink="/cartelera" class="main-nav-link">Perfil</a>
+        <a
+          routerLink="/perfil"
+          *ngIf="rol === 'ROLE_CLIENTE'"
+          class="main-nav-link"
+          >Perfil</a
+        >
         <a
           routerLink="/admin"
           class="main-nav-link"
