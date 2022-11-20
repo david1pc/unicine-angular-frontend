@@ -1,3 +1,5 @@
+import { Ciudad, Teatro } from 'src/app/admin/interfaces/admin.interface';
+
 export interface Resultado {
   page: number;
   peliculas: Pelicula[];
@@ -20,4 +22,9 @@ export interface Pelicula {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface BusquedaFunciones {
+  ciudad: Ciudad;
+  teatro: Teatro;
 }

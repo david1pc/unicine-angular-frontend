@@ -120,10 +120,8 @@ export class EsquemaComponent implements OnInit {
   cambiarColor(event: any) {
     const element = document.getElementById(event.target.id);
     const filaCol: string[] = element!.id.split(',');
-    console.log(filaCol);
     let i = Number(filaCol[0]);
     let j = Number(filaCol[1]);
-    console.log(i, j);
     if (element?.style.borderColor === 'rgb(51, 255, 87)') {
       element!.style.border = '2px solid #2A2C41';
       this.esquema.map((e) => {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { ClienteServiceService } from '../../services/cliente.service';
   styleUrls: ['./perfil.component.css'],
 })
 export class PerfilComponent implements OnInit {
-  miFormulario: FormGroup = this.fb.group({
+  miFormulario: UntypedFormGroup = this.fb.group({
     primer_nombre: [, [Validators.required, Validators.minLength(3)]],
     segundo_nombre: [,],
     primer_apellido: [, [Validators.required, Validators.minLength(3)]],
@@ -42,10 +42,15 @@ export class PerfilComponent implements OnInit {
 
   nuevoCliente!: ClienteFile;
 
-  nuevoTelefono: FormControl = this.fb.control('', Validators.required);
+  nuevoTelefono: UntypedFormControl = this.fb.control('', Validators.required);
+
+  usernameCliente!: string;
+
+  correoCliente!: string;
+  passwdCliente!: string;
 
   get telefonosArr() {
-    return this.miFormulario.get('telefonos') as FormArray;
+    return this.miFormulario.get('telefonos') as UntypedFormArray;
   }
 
   campoEsValido(campo: string) {
@@ -56,9 +61,10 @@ export class PerfilComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clienteService: ClienteServiceService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   agregarTelefono() {
@@ -71,7 +77,7 @@ export class PerfilComponent implements OnInit {
     }
 
     this.telefonosArr.push(
-      new FormControl(this.nuevoTelefono.value, Validators.required)
+      new UntypedFormControl(this.nuevoTelefono.value, Validators.required)
     );
 
     this.nuevoTelefono.setValue('');
@@ -101,10 +107,15 @@ export class PerfilComponent implements OnInit {
       this.codigoCliente = cliente.codigo;
       this.estadoCliente = cliente.estado;
       this.imagenCliente = cliente.imagen;
+      this.usernameCliente = cliente.username;
+      this.correoCliente = cliente.correo;
+      this.passwdCliente = cliente.password;
 
       this.miFormulario.controls['cedula'].setValue(cliente.cedula);
       for (let telef of cliente.telefonos) {
-        this.telefonosArr.push(new FormControl(telef, Validators.required));
+        this.telefonosArr.push(
+          new UntypedFormControl(telef, Validators.required)
+        );
       }
       this.miFormulario.controls['password'].setValue(cliente.password);
       this.miFormulario.controls['username'].setValue(cliente.username);
@@ -148,9 +159,17 @@ export class PerfilComponent implements OnInit {
 
           this.miFormulario.reset();
 
-          this.ngOnInit();
-
-          this.router.navigate(['./perfil']);
+          if (
+            resp.cliente.correo !== this.correoCliente ||
+            resp.cliente.username !== this.usernameCliente ||
+            resp.cliente.password !== this.passwdCliente
+          ) {
+            this.authService.logout();
+            this.router.navigate(['./']);
+          } else {
+            this.ngOnInit();
+            this.router.navigate(['./perfil']);
+          }
         };
         Swal.fire({
           title: 'Actualizar datos del cliente',

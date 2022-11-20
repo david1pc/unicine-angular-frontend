@@ -166,26 +166,29 @@ export interface Compra {
   entradas: Entrada[];
   compraConfiterias: CompraConfiteria[];
   compraCombos: CompraCombo[];
+  funcion: Funcion;
 }
 
 export interface CompraConfiteria {
   codigo: number;
   cantidad: number;
   precio: number;
+  confiteria: Confiteria;
+  compra?: Compra;
 }
 
 export interface CompraCombo {
   codigo: number;
   cantidad: number;
   precio: number;
-  compra: Compra;
+  compra?: Compra;
   combo: Combo;
 }
 
 export interface Entrada {
   codigo: number;
   precio: number;
-  fila: string;
+  fila: number;
   columna: number;
 }
 

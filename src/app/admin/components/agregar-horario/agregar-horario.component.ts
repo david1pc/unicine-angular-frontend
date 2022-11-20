@@ -15,7 +15,9 @@ export class AgregarHorarioComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Horario
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data.fecha_inicio);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

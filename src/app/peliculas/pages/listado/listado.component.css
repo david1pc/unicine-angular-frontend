@@ -1,3 +1,11 @@
+.section-cartelera {
+  margin-top: 6.4rem;
+}
+
+.estreno,
+.preventa {
+}
+
 .cartelera-busqueda {
   display: flex;
   justify-content: center;
@@ -13,22 +21,10 @@
   padding: 0 1.6rem;
 }
 
-.estreno {
-  /*   display: grid;
-  gap: 1.2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
-}
-
 .cartelera-title {
   font-size: 2rem;
   padding: 1.2rem 1.6rem;
   margin-bottom: 3.2rem;
-}
-
-.preventa {
-  /*   display: grid;
-  gap: 1.2rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
 }
 
 .preventa-t {

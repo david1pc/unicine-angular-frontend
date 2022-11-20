@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Imagen } from 'src/app/admin/interfaces/admin.interface';
@@ -17,7 +17,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent implements OnInit {
-  miFormulario: FormGroup = this.fb.group({
+  miFormulario: UntypedFormGroup = this.fb.group({
     primer_nombre: [, [Validators.required, Validators.minLength(3)]],
     segundo_nombre: [,],
     primer_apellido: [, [Validators.required, Validators.minLength(3)]],
@@ -34,10 +34,10 @@ export class RegistroComponent implements OnInit {
 
   nuevoCliente!: ClienteFile;
 
-  nuevoTelefono: FormControl = this.fb.control('', Validators.required);
+  nuevoTelefono: UntypedFormControl = this.fb.control('', Validators.required);
 
   get telefonosArr() {
-    return this.miFormulario.get('telefonos') as FormArray;
+    return this.miFormulario.get('telefonos') as UntypedFormArray;
   }
 
   campoEsValido(campo: string) {
@@ -47,7 +47,7 @@ export class RegistroComponent implements OnInit {
     );
   }
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  constructor(private authService: AuthService, private fb: UntypedFormBuilder) {}
 
   agregarTelefono() {
     if (!Number(this.nuevoTelefono.value)) {
@@ -59,7 +59,7 @@ export class RegistroComponent implements OnInit {
     }
 
     this.telefonosArr.push(
-      new FormControl(this.nuevoTelefono.value, Validators.required)
+      new UntypedFormControl(this.nuevoTelefono.value, Validators.required)
     );
 
     this.nuevoTelefono.setValue('');

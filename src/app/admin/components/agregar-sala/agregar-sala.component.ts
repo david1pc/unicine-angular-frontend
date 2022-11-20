@@ -28,8 +28,8 @@ export class AgregarSalaComponent implements OnInit {
       this.distribucionesSillas = result.distribucion;
     });
 
-    this.adminService.listarAdminTeatros().subscribe((result: any) => {
-      this.teatros = result.admins_teatro;
+    this.adminTeatroService.listarTeatros().subscribe((result: any) => {
+      this.teatros = result.teatros;
     });
   }
 

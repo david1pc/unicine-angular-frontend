@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Buscar peliculas</h1>
+<div mat-dialog-content class="container">
+  <mat-form-field appearance="fill">
+    <mat-label>Ingrese la ciudad</mat-label>
+    <mat-select [(ngModel)]="data.ciudad" name="ciudad" class="select" required>
+      <mat-option *ngFor="let c of ciudades" [value]="c">
+        {{ c.nombre }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="!data.ciudad">Debe ingresar la ciudad</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Ingrese el teatro</mat-label>
+    <mat-select [(ngModel)]="data.teatro" name="teatro" class="select">
+      <mat-option *ngFor="let t of teatros" [value]="t">
+        {{ t.codigo }}. {{ t.direccion }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial>
+    Confirmar
+  </button>
+</div>

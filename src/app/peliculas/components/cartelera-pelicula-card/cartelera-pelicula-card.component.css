@@ -93,6 +93,7 @@ Default: 9px
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  padding: 0;
 }
 
 .card-footer-etiqueta {
@@ -102,11 +103,15 @@ Default: 9px
 }
 
 .accordion {
-  width: 700px;
+  width: 900px;
   margin: 6.4rem auto;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
+}
+
+.select-ciudades {
+  width: 20rem;
 }
 
 .item {
@@ -175,4 +180,49 @@ Default: 9px
 
 .input-date {
   height: 3.2rem;
+}
+
+.mat-card > .mat-card-actions:last-child {
+  margin-bottom: 0;
+}
+
+.select-ciudades {
+  margin: 0 16px;
+}
+
+.offcanvas-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.offcanvas-p {
+  font-size: 1.6rem;
+}
+
+.hora {
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  border: 2px solid #2a2c41;
+  text-align: center;
+}
+
+.horario-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.offcanvas-title {
+  font-size: 1.8rem;
+}
+
+.img-canvas {
+  width: 5rem;
+  height: 5rem;
+}
+
+.btn-comprar {
+  width: 6rem;
+  height: 3rem;
 }

@@ -1,0 +1,159 @@
+<app-navbar></app-navbar>
+<section class="container">
+  <mat-tab-group>
+    <mat-tab label="Entradas">
+      <div class="container-confiteria">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ funcion.precio }}</td>
+              <td>
+                <div class="container-input">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      value=""
+                      id="entradas"
+                      [(ngModel)]="cantidadEntradas"
+                      (blur)="cambiarTotalEntradas()"
+                    />
+                  </mat-form-field>
+                </div>
+              </td>
+              <td id="precioEntrada">
+                {{ totalEntradas }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Confiteria">
+      <div class="container-confiteria">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let confiteria of confiterias; let i = index">
+              <th scope="row">{{ confiteria.nombre }}</th>
+              <td>
+                <img
+                  [src]="confiteria.imagen.imagenUrl"
+                  class="me-2"
+                  style="width: 75px"
+                />
+                {{ confiteria.descripcion }}
+              </td>
+              <td>{{ confiteria.precio }}</td>
+              <td>
+                <div class="container-input">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      value=""
+                      id="{{ confiteria.codigo }}"
+                      [(ngModel)]="confiteriaTotal[i].cantidad"
+                      (blur)="cambiarTotal(confiteria, i)"
+                    />
+                  </mat-form-field>
+                </div>
+              </td>
+              <td id="precio{{ confiteria.codigo }}">
+                {{ confiteriaTotal[i].total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Combos">
+      <div class="container-confiteria">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let combo of combos; let i = index">
+              <th scope="row">{{ combo.nombre }}</th>
+              <td>
+                <img
+                  [src]="combo.imagen.imagenUrl"
+                  class="me-2"
+                  style="width: 75px"
+                />
+                {{ combo.descripcion }}
+              </td>
+              <td>{{ combo.precio }}</td>
+              <td>
+                <div class="container-input">
+                  <mat-form-field>
+                    <input
+                      matInput
+                      type="number"
+                      value=""
+                      id="{{ combo.codigo }}"
+                      [(ngModel)]="confiteriaTotalCombos[i].cantidad"
+                      (blur)="cambiarTotalCombos(combo, i)"
+                    />
+                  </mat-form-field>
+                </div>
+              </td>
+              <td id="precio{{ combo.codigo }}">
+                {{ confiteriaTotalCombos[i].total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <mat-list>
+    <mat-list-item
+      ><strong>Subtotal confiteria:</strong>
+      {{ totalCompraConfiterias | currency }}</mat-list-item
+    >
+    <mat-list-item
+      ><strong>Subtotal combos:</strong
+      >{{ totalCompraCombos | currency }}</mat-list-item
+    >
+    <mat-list-item
+      ><strong>Subtotal entradas:</strong
+      >{{ totalEntradas | currency }}</mat-list-item
+    >
+    <mat-list-item
+      ><strong>Total:</strong>{{ totalCompra | currency }}</mat-list-item
+    >
+  </mat-list>
+  <div class="button-sillas">
+    <button
+      mat-stroked-button
+      (click)="agregarSillas()"
+      routerLink="sillas"
+      [disabled]="!totalEntradas"
+    >
+      Escoger sillas
+    </button>
+  </div>
+</section>

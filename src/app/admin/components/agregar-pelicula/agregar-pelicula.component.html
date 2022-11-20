@@ -18,7 +18,7 @@
     <p>Url_trailer</p>
     <mat-form-field appearance="fill">
       <mat-label>Ingrese la url del trailer</mat-label>
-      <input matInput [(ngModel)]="data.url_trailer" required />
+      <input matInput [(ngModel)]="data.url_trailer" type="url" required />
       <mat-error *ngIf="!data.url_trailer"
         >Debe ingresar la url del trailer</mat-error
       >

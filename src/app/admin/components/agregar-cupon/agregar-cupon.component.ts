@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cupon, Pelicula } from '../../interfaces/admin.interface';
 
@@ -9,7 +9,7 @@ import { Cupon, Pelicula } from '../../interfaces/admin.interface';
   styleUrls: ['./agregar-cupon.component.css'],
 })
 export class AgregarCuponComponent implements OnInit {
-  descuentoControl: FormControl = new FormControl(1, [
+  descuentoControl: UntypedFormControl = new UntypedFormControl(1, [
     Validators.required,
     Validators.min(1),
   ]);

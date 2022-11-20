@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Pelicula } from '../../interfaces/peliculas.interface';
+import { Funcion, Pelicula } from 'src/app/admin/interfaces/admin.interface';
+import { PeliculasService } from '../../services/peliculas.service';
 
 @Component({
   selector: 'app-pelicula-card',
@@ -8,9 +9,13 @@ import { Pelicula } from '../../interfaces/peliculas.interface';
 })
 export class PeliculaCardComponent implements OnInit {
   @Input() peliculas: Pelicula[] = [];
-  imgUrl: string = 'https://image.tmdb.org/t/p/w500';
 
-  constructor() {}
+  constructor(private peliculasService: PeliculasService) {}
 
   ngOnInit(): void {}
+
+  enviarPelicula(pelicula: Pelicula) {
+    localStorage.removeItem('pelicula');
+    this.peliculasService.cambiarPelicula(pelicula);
+  }
 }

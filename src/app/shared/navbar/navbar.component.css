@@ -54,6 +54,10 @@
   background-color: #bbe4fb;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 .carrito {
   width: 3rem;
   width: 3rem;
