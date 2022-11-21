@@ -14,6 +14,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
 import { CompraComponent } from './pages/compra/compra.component';
 import { SillasComponent } from './pages/sillas/sillas.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SillasComponent } from './pages/sillas/sillas.component';
     FuncionModalComponent,
     CompraComponent,
     SillasComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

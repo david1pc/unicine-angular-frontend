@@ -1,0 +1,140 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <mat-card class="card-contenido-compra">
+    <mat-card-header>
+      <mat-card-title class="mat-card-titulo"
+        >Detalles de compra</mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div class="entradas">
+        <h2>Entradas</h2>
+        <mat-accordion>
+          <mat-expansion-panel
+            *ngFor="let entrada of compra.entradas"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title
+                >Entrada {{ entrada.ind }}{{ entrada.columna }}</mat-panel-title
+              >
+            </mat-expansion-panel-header>
+            <p><strong>Precio: </strong>{{ entrada.precio | currency }}</p>
+            <p><strong>Fila: </strong>{{ entrada.fila }}</p>
+            <p><strong>Columna: </strong>{{ entrada.columna }}</p>
+            <p><strong>Fila indicativo: </strong>{{ entrada.ind }}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="confiteria" *ngIf="compra.compraConfiterias.length > 0">
+        <h2>Confiteria</h2>
+        <mat-accordion>
+          <mat-expansion-panel
+            *ngFor="let compraConfiteria of compra.compraConfiterias"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{
+                compraConfiteria.confiteria.nombre
+              }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              <strong>Descripcion: </strong
+              >{{ compraConfiteria.confiteria.descripcion }}
+            </p>
+            <p>
+              <strong>Precio: </strong>{{ compraConfiteria.precio | currency }}
+            </p>
+            <p><strong>Cantidad: </strong>{{ compraConfiteria.cantidad }}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="combos" *ngIf="compra.compraCombos.length > 0">
+        <h2>Combos</h2>
+        <mat-accordion>
+          <mat-expansion-panel
+            *ngFor="let compraCombos of compra.compraCombos"
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ compraCombos.combo.nombre }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              <strong>Descripcion: </strong>{{ compraCombos.combo.descripcion }}
+            </p>
+            <p><strong>Precio: </strong>{{ compraCombos.precio | currency }}</p>
+            <p><strong>Cantidad: </strong>{{ compraCombos.cantidad }}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button routerLink="../">Ir atrás</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="card-checkout">
+    <mat-card-header>
+      <mat-card-title>Compra</mat-card-title>
+      <mat-card-subtitle>Carrito</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item
+          ><strong>Subtotal confiteria:</strong>
+          <span
+            class="tachado"
+            *ngIf="totalSinDescuentoCompraConfiterias > 0"
+            >{{ totalSinDescuentoCompraConfiterias | currency }}</span
+          >
+          {{ totalCompraConfiterias | currency }}</mat-list-item
+        >
+        <mat-list-item
+          ><strong>Subtotal combos:</strong
+          ><span class="tachado" *ngIf="totalSinDescuentoCompraCombos > 0">{{
+            totalSinDescuentoCompraCombos | currency
+          }}</span>
+          {{ totalCompraCombos | currency }}</mat-list-item
+        >
+        <mat-list-item
+          ><strong>Subtotal entradas:</strong
+          ><span class="tachado" *ngIf="totalSinDescuentoEntradas > 0">{{
+            totalSinDescuentoEntradas | currency
+          }}</span>
+          {{ totalEntradas | currency }}</mat-list-item
+        >
+        <mat-list-item
+          ><strong>Total a pagar:</strong
+          ><span class="tachado" *ngIf="totalSinDescuentoCompra > 0">{{
+            totalSinDescuentoCompra | currency
+          }}</span>
+          {{ totalCompra | currency }}</mat-list-item
+        >
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="input-checkout-container">
+        <mat-form-field>
+          <mat-label class="input-label-checkout">Codigo cupon</mat-label>
+          <input
+            class="input-checkout"
+            matInput
+            placeholder="codigo cupon"
+            [(ngModel)]="codigoCupon"
+          />
+        </mat-form-field>
+        <span class="descuento" *ngIf="descuento > 0"
+          ><strong>Descuento: </strong>{{ descuento }}%</span
+        >
+        <div class="btn-cupones">
+          <button mat-button (click)="redimirCupon()">Redimir cupon</button>
+          <button mat-button *ngIf="descuento > 0" (click)="vaciarPrecios()">
+            Eliminar cupon
+          </button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,2 +1,43 @@
 <app-navbar></app-navbar>
-<p>Hola</p>
+<div class="container">
+  <div class="info-cont">
+    <p><strong>Sillas seleccionadas: </strong>{{ contadorEntradas }}</p>
+    <p><strong>Sillas restantes: </strong>{{ contadorEntradasDisponibles }}</p>
+  </div>
+  <div class="grid" #grid [style.--columns]="gridColumns">
+    <div class="filas" *ngFor="let item of dataF">
+      <button
+        class="btn-silla"
+        id="{{ item.f }},{{ item.columna }}"
+        #silla
+        [ngClass]="{
+          'btn-green': item.ind === '-',
+          'btn-orange': item.ind === '+'
+        }"
+        [style.--colorSilla]="colorSilla"
+        (click)="cambiarColor($event)"
+        [disabled]="item.ind === '-' || (item.ind === '+' && esSillasGuardadas)"
+      >
+        {{ item.fila }} {{ item.columna }}
+      </button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="habilitado">
+      <p class="p-title">Habilitado</p>
+    </div>
+    <div class="deshabilitado">
+      <p class="p-title">Deshabilitado</p>
+    </div>
+    <div class="ocupado">
+      <p class="p-title">Ocupado</p>
+    </div>
+  </div>
+  <div class="btn-sillas">
+    <button mat-button (click)="guardar()">Guardar</button>
+    <button mat-button *ngIf="esSillasGuardadas" (click)="refrescar()">
+      Eliminar seleccion
+    </button>
+    <button mat-button routerLink="../">Ir atrás.</button>
+  </div>
+</div>

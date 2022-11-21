@@ -1,0 +1,94 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: var(--columns);
+}
+
+.btn-silla {
+  display: inline-block;
+  border: 2px solid var(--colorSilla);
+  width: 4rem;
+  height: 4rem;
+}
+
+.btn-silla-select {
+  border: 2px solid var(--colorSilla);
+}
+
+.btn-green {
+  display: inline-block;
+  border: 2px solid rgb(51, 255, 87);
+  width: 4rem;
+  height: 4rem;
+}
+
+.btn-orange {
+  display: inline-block;
+  border: 2px solid rgb(205, 149, 8);
+  width: 4rem;
+  height: 4rem;
+}
+
+.habilitado {
+  display: flex;
+  align-items: center;
+  background-color: #2a2c41;
+  width: 100%;
+  text-align: center;
+  height: 4rem;
+}
+
+.ocupado {
+  display: flex;
+  align-items: center;
+  background-color: rgb(205, 149, 8);
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+}
+
+.deshabilitado {
+  display: flex;
+  align-items: center;
+  background-color: rgb(51, 255, 87);
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+}
+
+.p-title {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+  width: 8rem;
+}
+
+.info-cont {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.btn-sillas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}

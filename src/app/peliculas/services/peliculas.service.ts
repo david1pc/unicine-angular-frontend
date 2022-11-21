@@ -25,7 +25,7 @@ export class PeliculasService {
   private sourceFuncion = new BehaviorSubject<Funcion>(funcion);
   ultimaSeleccionFuncion = this.sourceFuncion.asObservable();
   private sourceCompra = new BehaviorSubject<Compra>(compra);
-  ultimaSeleccionCompra = this.sourceFuncion.asObservable();
+  ultimaSeleccionCompra = this.sourceCompra.asObservable();
 
   cambiarPelicula(seleccion: Pelicula) {
     this.sourcePelicula.next(seleccion);
@@ -95,5 +95,11 @@ export class PeliculasService {
 
   listarCombos(): Observable<ResultadoCombos> {
     return this.http.get<ResultadoCombos>(`${this.baseUrlApp}/clientes/combos`);
+  }
+
+  redimirCupon(codigoCupon: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrlApp}/clientes/cupon/${codigoCupon}`
+    );
   }
 }

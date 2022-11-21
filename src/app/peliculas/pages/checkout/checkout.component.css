@@ -1,0 +1,52 @@
+.container {
+  display: grid;
+  grid-template-columns: 3fr 1.5fr;
+  font-size: 2rem;
+}
+
+.lh-condensed {
+  line-height: 1.25;
+}
+
+.card-contenido-compra {
+  width: 80%;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.mat-card-titulo {
+  font-size: 2.4rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.input-checkout {
+  font-size: 1.2rem;
+}
+
+.input-label-checkout {
+  font-size: 1.6rem;
+}
+
+.input-checkout-container {
+  padding: 0 16px;
+}
+
+.tachado {
+  text-decoration: line-through;
+}
+
+.btn-cupones {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.descuento {
+  font-size: 1.2rem;
+}

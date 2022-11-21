@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { CompraComponent } from './pages/compra/compra.component';
 import { ListadoComponent } from './pages/listado/listado.component';
 import { PeliculaComponent } from './pages/pelicula/pelicula.component';
@@ -19,7 +20,11 @@ const rutas: Routes = [
       },
       {
         path: 'funcion/compra/sillas',
-        component: SillasComponent
+        component: SillasComponent,
+      },
+      {
+        path: 'funcion/compra/sillas/checkout',
+        component: CheckoutComponent,
       },
       {
         path: '**',

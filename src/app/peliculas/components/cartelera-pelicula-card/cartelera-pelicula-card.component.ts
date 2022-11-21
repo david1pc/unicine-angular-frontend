@@ -167,24 +167,25 @@ export class CarteleraPeliculaCardComponent implements OnInit {
           });
           for (let i = 1; i < result.funciones.length; i++) {
             for (let j = 0; j < this.funcionesDisponibles.length; j++) {
-              if (
-                this.funcionesDisponibles[j].sala.teatro.codigo ==
+              let indexFuncionDisponible = this.validarIdTeatro(
                 result.funciones[i].sala.teatro.codigo
-              ) {
-                this.funcionesDisponibles[j].horas.push({
+              );
+              if (indexFuncionDisponible === -1) {
+                let h: Horas = {
                   codigoFuncion: result.funciones[i].codigo,
                   hora: result.funciones[i].horario.hora,
+                };
+                let ha: Horas[] = [];
+                ha.push(h);
+                this.funcionesDisponibles.push({
+                  codigo: j,
+                  horas: ha,
+                  sala: result.funciones[i].sala,
                 });
               } else {
-                this.funcionesDisponibles.push({
-                  codigo: i,
-                  sala: result.funciones[i].sala,
-                  horas: [
-                    {
-                      codigoFuncion: result.funciones[i].codigo,
-                      hora: result.funciones[i].horario.hora,
-                    },
-                  ],
+                this.funcionesDisponibles[indexFuncionDisponible].horas.push({
+                  codigoFuncion: result.funciones[i].codigo,
+                  hora: result.funciones[i].horario.hora,
                 });
               }
               break;
@@ -192,6 +193,25 @@ export class CarteleraPeliculaCardComponent implements OnInit {
           }
         }
       });
+  }
+
+  validarIdTeatro(codigoTeatro: number) {
+    let esValido: boolean = false;
+    let indexFuncionDisponible: number = 0;
+
+    for (let i = 0; i < this.funcionesDisponibles.length; i++) {
+      if (this.funcionesDisponibles[i].sala.teatro.codigo == codigoTeatro) {
+        esValido = true;
+        indexFuncionDisponible = i;
+        break;
+      }
+    }
+
+    if (esValido === false) {
+      return -1;
+    }
+
+    return indexFuncionDisponible;
   }
 
   verSillas(codigoFuncion: number, content: TemplateRef<any>) {
@@ -209,6 +229,8 @@ export class CarteleraPeliculaCardComponent implements OnInit {
 
   agregarFuncion(offcanvas: any) {
     this.peliculasService.cambiarFuncion(this.funcionSelect);
+    localStorage.removeItem('compra_detalle');
+    localStorage.removeItem('compra');
     localStorage.setItem('funcion', JSON.stringify(this.funcionSelect));
     offcanvas.close();
   }

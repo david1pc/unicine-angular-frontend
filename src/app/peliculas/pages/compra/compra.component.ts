@@ -44,6 +44,9 @@ export class CompraComponent implements OnInit {
   totalCompraCombos: number = 0;
   totalCompraConfiterias: number = 0;
   totalCompra: number = 0;
+  compraCombos: CompraCombo[] = [];
+  compraConfiteria: CompraConfiteria[] = [];
+  entradas: Entrada[] = [];
 
   constructor(private peliculasService: PeliculasService) {}
 
@@ -161,9 +164,8 @@ export class CompraComponent implements OnInit {
   }
 
   agregarSillas() {
-    let entradas: Entrada[] = [];
     for (let i = 0; i < this.cantidadEntradas; i++) {
-      entradas.push({
+      this.entradas.push({
         codigo: 0,
         columna: 0,
         fila: 0,
@@ -171,13 +173,10 @@ export class CompraComponent implements OnInit {
       });
     }
 
-    let compraCombos: CompraCombo[] = [];
-    let compraConfiteria: CompraConfiteria[] = [];
-
     this.confiteriaTotal.forEach((c) => {
       if (c.cantidad > 0) {
         let confit = this.confiterias[c.index];
-        compraConfiteria.push({
+        this.compraConfiteria.push({
           cantidad: c.cantidad,
           codigo: 0,
           confiteria: confit,
@@ -189,7 +188,7 @@ export class CompraComponent implements OnInit {
     this.confiteriaTotalCombos.forEach((c) => {
       if (c.cantidad > 0) {
         let comb = this.combos[c.index];
-        compraCombos.push({
+        this.compraCombos.push({
           cantidad: c.cantidad,
           codigo: 0,
           combo: comb,
@@ -200,9 +199,9 @@ export class CompraComponent implements OnInit {
 
     let compra: Compra = {
       codigo: 0,
-      compraCombos: compraCombos,
-      compraConfiterias: compraConfiteria,
-      entradas: entradas,
+      compraCombos: this.compraCombos,
+      compraConfiterias: this.compraConfiteria,
+      entradas: this.entradas,
       fecha_compra: new Date(),
       medioPago: '',
       valor_total: this.totalCompra,
@@ -219,9 +218,23 @@ export class CompraComponent implements OnInit {
       totalEntradas: this.totalEntradas,
     };
 
-    this.peliculasService.cambiarCompra(compra);
+    let compraLocal: Compra =
+      localStorage.getItem('compra') !== null
+        ? JSON.parse(localStorage.getItem('compra')!)
+        : [];
 
-    localStorage.setItem('compra', JSON.stringify(compra));
+    if (Object.keys(compraLocal).length !== 0) {
+      compraLocal.entradas = this.entradas;
+      compraLocal.compraCombos = this.compraCombos;
+      compraLocal.compraConfiterias = this.compraConfiteria;
+      this.peliculasService.cambiarCompra(compraLocal);
+      localStorage.removeItem('compra');
+      localStorage.setItem('compra', JSON.stringify(compraLocal));
+    } else {
+      this.peliculasService.cambiarCompra(compra);
+      localStorage.setItem('compra', JSON.stringify(compra));
+    }
+
     localStorage.setItem('compra_detalle', JSON.stringify(compra_detalle));
   }
 }

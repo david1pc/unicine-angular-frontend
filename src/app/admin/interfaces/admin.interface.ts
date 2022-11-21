@@ -190,6 +190,7 @@ export interface Entrada {
   precio: number;
   fila: number;
   columna: number;
+  ind?: string;
 }
 
 export interface Confiteria {
