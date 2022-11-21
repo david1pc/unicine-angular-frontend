@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import {
   Compra,
+  CuponCliente,
+  Entrada,
+  Entrada2,
   Funcion,
   Horario,
+  NuevaCompra,
   Pelicula,
   ResultadoCombos,
   ResultadoConfiteria,
@@ -26,6 +30,7 @@ export class PeliculasService {
   ultimaSeleccionFuncion = this.sourceFuncion.asObservable();
   private sourceCompra = new BehaviorSubject<Compra>(compra);
   ultimaSeleccionCompra = this.sourceCompra.asObservable();
+  contenido!: string;
 
   cambiarPelicula(seleccion: Pelicula) {
     this.sourcePelicula.next(seleccion);
@@ -101,5 +106,43 @@ export class PeliculasService {
     return this.http.get<any>(
       `${this.baseUrlApp}/clientes/cupon/${codigoCupon}`
     );
+  }
+
+  registrarCompra(
+    compra: Compra,
+    contenido: string,
+    cuponCliente: CuponCliente
+  ): Observable<any> {
+    let username = localStorage.getItem('username') || '';
+    let nueva_compra: NuevaCompra = {
+      codigo: 0,
+      compraCombos: compra.compraCombo,
+      compraConfiterias: compra.compraConfiteria,
+      contenido: contenido,
+      entradas: compra.entradas,
+      fecha_compra: compra.fecha_compra,
+      funcion: compra.funcion,
+      medioPago: compra.medioPago,
+      cuponCliente: cuponCliente,
+      username: username,
+      valor_total: compra.valor_total,
+    };
+
+    console.log(nueva_compra);
+
+    return this.http.post<any>(
+      `${this.baseUrlApp}/clientes/compras/`,
+      nueva_compra
+    );
+  }
+
+  generarCodigoQREntrada(entradas: Entrada[]) {
+    return this.http
+      .post<any>(`${this.baseUrlApp}/clientes/entradas/`, entradas)
+      .pipe(
+        map((e) => {
+          return e.barcode;
+        })
+      );
   }
 }

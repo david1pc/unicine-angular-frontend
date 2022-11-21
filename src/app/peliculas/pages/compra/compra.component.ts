@@ -44,7 +44,7 @@ export class CompraComponent implements OnInit {
   totalCompraCombos: number = 0;
   totalCompraConfiterias: number = 0;
   totalCompra: number = 0;
-  compraCombos: CompraCombo[] = [];
+  compraCombo: CompraCombo[] = [];
   compraConfiteria: CompraConfiteria[] = [];
   entradas: Entrada[] = [];
 
@@ -188,7 +188,7 @@ export class CompraComponent implements OnInit {
     this.confiteriaTotalCombos.forEach((c) => {
       if (c.cantidad > 0) {
         let comb = this.combos[c.index];
-        this.compraCombos.push({
+        this.compraCombo.push({
           cantidad: c.cantidad,
           codigo: 0,
           combo: comb,
@@ -199,8 +199,8 @@ export class CompraComponent implements OnInit {
 
     let compra: Compra = {
       codigo: 0,
-      compraCombos: this.compraCombos,
-      compraConfiterias: this.compraConfiteria,
+      compraCombo: this.compraCombo,
+      compraConfiteria: this.compraConfiteria,
       entradas: this.entradas,
       fecha_compra: new Date(),
       medioPago: '',
@@ -225,8 +225,8 @@ export class CompraComponent implements OnInit {
 
     if (Object.keys(compraLocal).length !== 0) {
       compraLocal.entradas = this.entradas;
-      compraLocal.compraCombos = this.compraCombos;
-      compraLocal.compraConfiterias = this.compraConfiteria;
+      compraLocal.compraCombo = this.compraCombo;
+      compraLocal.compraConfiteria = this.compraConfiteria;
       this.peliculasService.cambiarCompra(compraLocal);
       localStorage.removeItem('compra');
       localStorage.setItem('compra', JSON.stringify(compraLocal));

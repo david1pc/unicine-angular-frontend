@@ -27,11 +27,11 @@
           </mat-expansion-panel>
         </mat-accordion>
       </div>
-      <div class="confiteria" *ngIf="compra.compraConfiterias.length > 0">
+      <div class="confiteria" *ngIf="compra.compraConfiteria.length > 0">
         <h2>Confiteria</h2>
         <mat-accordion>
           <mat-expansion-panel
-            *ngFor="let compraConfiteria of compra.compraConfiterias"
+            *ngFor="let compraConfiteria of compra.compraConfiteria"
             (opened)="panelOpenState = true"
             (closed)="panelOpenState = false"
           >
@@ -51,11 +51,11 @@
           </mat-expansion-panel>
         </mat-accordion>
       </div>
-      <div class="combos" *ngIf="compra.compraCombos.length > 0">
+      <div class="combos" *ngIf="compra.compraCombo.length > 0">
         <h2>Combos</h2>
         <mat-accordion>
           <mat-expansion-panel
-            *ngFor="let compraCombos of compra.compraCombos"
+            *ngFor="let compraCombos of compra.compraCombo"
             (opened)="panelOpenState = true"
             (closed)="panelOpenState = false"
           >
@@ -133,6 +133,25 @@
           <button mat-button *ngIf="descuento > 0" (click)="vaciarPrecios()">
             Eliminar cupon
           </button>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="metodo-pago">
+          <h4>Seleccione el metodo de pago</h4>
+          <mat-form-field appearance="fill">
+            <mat-label class="input-checkout">Metodo de pago</mat-label>
+            <mat-select
+              class="input-checkout"
+              [(ngModel)]="metodoPagoEscogido"
+              name="metodo"
+            >
+              <mat-option *ngFor="let metodo of metodoPago" [value]="metodo">
+                {{ metodo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="btn-compra">
+          <button mat-button (click)="realizarCompra()">Realizar compra</button>
         </div>
       </div>
     </mat-card-actions>

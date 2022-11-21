@@ -60,6 +60,8 @@ export class CarteleraPeliculaCardComponent implements OnInit {
     { dia: 'Sun', i: 'D' },
   ];
 
+  fechaEscogida!: Date;
+
   ciudades!: Ciudad[];
   ciudadSelec!: Ciudad;
   funcionesDisponibles: FuncionDisponibles[] = [];
@@ -143,6 +145,7 @@ export class CarteleraPeliculaCardComponent implements OnInit {
     });
 
     let fecha = moment(dia.fecha, 'DD/MM/YYYY').toDate();
+    this.fechaEscogida = fecha;
 
     this.peliculasService
       .listarFuncionesPeliculas(
@@ -231,6 +234,7 @@ export class CarteleraPeliculaCardComponent implements OnInit {
     this.peliculasService.cambiarFuncion(this.funcionSelect);
     localStorage.removeItem('compra_detalle');
     localStorage.removeItem('compra');
+    localStorage.setItem('fecha_escogida', JSON.stringify(this.fechaEscogida));
     localStorage.setItem('funcion', JSON.stringify(this.funcionSelect));
     offcanvas.close();
   }

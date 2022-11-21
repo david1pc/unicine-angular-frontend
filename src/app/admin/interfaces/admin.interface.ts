@@ -61,6 +61,20 @@ export interface AdministradorTeatro {
   rol: Rol;
 }
 
+export interface NuevaCompra {
+  codigo: number;
+  medioPago: string;
+  fecha_compra: Date;
+  valor_total: number;
+  entradas: Entrada2[];
+  compraConfiterias: CompraConfiteria[];
+  compraCombos: CompraCombo[];
+  funcion: Funcion;
+  cuponCliente: CuponCliente;
+  contenido: string;
+  username: string;
+}
+
 export interface Teatro {
   codigo: number;
   direccion: string;
@@ -164,8 +178,9 @@ export interface Compra {
   fecha_compra: Date;
   valor_total: number;
   entradas: Entrada[];
-  compraConfiterias: CompraConfiteria[];
-  compraCombos: CompraCombo[];
+  compraConfiteria: CompraConfiteria[];
+  compraCombo: CompraCombo[];
+  cuponCliente?: CuponCliente;
   funcion: Funcion;
 }
 
@@ -191,6 +206,13 @@ export interface Entrada {
   fila: number;
   columna: number;
   ind?: string;
+}
+
+export interface Entrada2 {
+  codigo: number;
+  precio: number;
+  fila: number;
+  columna: number;
 }
 
 export interface Confiteria {
@@ -225,7 +247,7 @@ export interface CuponCliente {
   codigo?: number;
   estado: boolean;
   cupon: Cupon;
-  cliente: Cliente;
+  cliente?: Cliente;
 }
 
 export enum Genero {

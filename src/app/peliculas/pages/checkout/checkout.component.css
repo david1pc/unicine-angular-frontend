@@ -45,8 +45,13 @@ h2 {
 .btn-cupones {
   display: flex;
   gap: 0.8rem;
+  margin-bottom: 1.6rem;
 }
 
 .descuento {
   font-size: 1.2rem;
+}
+
+.metodo-pago {
+  margin-top: 3.2rem;
 }

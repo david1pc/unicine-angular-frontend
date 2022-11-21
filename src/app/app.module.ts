@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TokenInterceptorService } from './auth/services/token-interceptor.service';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { TokenInterceptorService } from './auth/services/token-interceptor.servi
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+    QRCodeModule,
   ],
   providers: [
     {
