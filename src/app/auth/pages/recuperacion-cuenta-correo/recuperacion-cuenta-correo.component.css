@@ -50,12 +50,12 @@ Default: 9px
 }
 
 .card-title {
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 
 .card-p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   line-height: 1.2;
   margin-bottom: 1.2rem;
 }
@@ -69,7 +69,7 @@ Default: 9px
 .input-correo {
   height: 3.2rem;
   border-radius: 9px;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   border: 1px solid #2a2c41;
   padding: 0 1.6rem;
 }
@@ -79,9 +79,9 @@ Default: 9px
 }
 
 .card-btn {
-  width: 8rem;
-  height: 3.2rem;
   color: #fff;
+  font-size: 1.4rem;
+  padding: 0.8rem;
   border-radius: 9px;
   background-color: #2a2c41;
   cursor: pointer;

@@ -15,10 +15,8 @@ export class ActivacionCuentaComponent implements OnInit {
     private router: Router
   ) {}
 
-  activarCuenta() {
-    let str!: string | null;
-    str = this.activateRoute.snapshot.paramMap.get('msj');
-    console.log(str);
+  ngOnInit(): void {
+    let str = this.activateRoute.snapshot.paramMap.get('msj')!;
     this.authService.activarCuenta(str).subscribe({
       next: (resp: any) => {
         Swal.fire({
@@ -37,6 +35,4 @@ export class ActivacionCuentaComponent implements OnInit {
       },
     });
   }
-
-  ngOnInit(): void {}
 }

@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ClienteRoutingModule } from './cliente-routing.module';
 import { ComprasComponent } from './components/compras/compras.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [PrincipalComponent, PerfilComponent, ComprasComponent],
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClienteRoutingModule,
     SharedModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
 })
 export class ClienteModule {}

@@ -18,6 +18,7 @@ import { PeliculasService } from '../../services/peliculas.service';
 export class ListadoComponent implements OnInit {
   estrenos: Pelicula[] = [];
   preventas: Pelicula[] = [];
+  local: boolean = false;
 
   constructor(
     private peliculasService: PeliculasService,
@@ -34,6 +35,10 @@ export class ListadoComponent implements OnInit {
       localStorage.getItem('preventas') !== null
         ? JSON.parse(localStorage.getItem('preventas')!)
         : [];
+
+    if (this.estrenos.length > 0 || this.preventas.length > 0) {
+      this.local = true;
+    }
   }
 
   buscarPeliculas() {

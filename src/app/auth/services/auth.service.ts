@@ -74,6 +74,19 @@ export class AuthService {
     );
   }
 
+  recuperarCuenta(correo: String): Observable<any> {
+    return this.http.get<any>(
+      `${this.base_url}/clientes/recuperar-cuenta/${correo}`
+    );
+  }
+
+  verificarCuenta(str: string, passwd: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.base_url}/clientes/verificar-cuenta/${str}`,
+      passwd
+    );
+  }
+
   logout() {
     localStorage.clear();
   }

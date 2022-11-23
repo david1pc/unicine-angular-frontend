@@ -5,8 +5,12 @@
         class="btn-silla"
         id="{{ item.f }},{{ item.columna }}"
         #silla
-        [ngClass]="{ 'btn-green': item.ind === '-' }"
+        [ngClass]="{
+          'btn-green': item.ind === '-',
+          'btn-orange': item.ind === '+'
+        }"
         [style.--colorSilla]="colorSilla"
+        [disabled]="item.ind === '+'"
         (click)="cambiarColor($event)"
       >
         {{ item.fila }} {{ item.columna }}
@@ -19,6 +23,9 @@
     </div>
     <div class="deshabilitado">
       <p class="p-title">Deshabilitado</p>
+    </div>
+    <div class="ocupado">
+      <p class="p-title">Ocupado</p>
     </div>
     <button
       mat-button

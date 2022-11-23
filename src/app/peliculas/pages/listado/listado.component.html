@@ -3,6 +3,9 @@
 <button mat-stroked-button (click)="buscarPeliculas()">Buscar peliculas</button>
 <section class="section-cartelera">
   <div class="cartelera">
+    <h2 class="cartelera-title" *ngIf="local">
+      Últimos resultados de búsqueda
+    </h2>
     <div class="estrenos" *ngIf="estrenos.length > 0">
       <h2 class="cartelera-title">Estrenos</h2>
       <div>

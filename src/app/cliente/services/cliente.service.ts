@@ -58,4 +58,10 @@ export class ClienteServiceService {
 
     return this.http.put<any>(`${this.base_url}/clientes/actualizacion/`, fd);
   }
+
+  listarComprasCliente(username: string) {
+    return this.http.get<any>(
+      `${this.base_url}/clientes/compras-cliente/${username}`
+    );
+  }
 }

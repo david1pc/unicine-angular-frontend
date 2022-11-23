@@ -69,11 +69,10 @@
 
   <ng-container matColumnDef="distribucionSillas">
     <th mat-header-cell *matHeaderCellDef>
-      Distribucion de sillas(codigo, esquema, filas y columnas)
+      Distribucion de sillas(codigo, filas y columnas)
     </th>
     <td mat-cell *matCellDef="let element">
       {{ element.distribucionSillas["codigo"] }}.
-      {{ element.distribucionSillas["esquema"] }} -
       {{ element.distribucionSillas["filas"] }} -
       {{ element.distribucionSillas["columnas"] }}
     </td>

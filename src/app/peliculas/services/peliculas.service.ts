@@ -128,8 +128,6 @@ export class PeliculasService {
       valor_total: compra.valor_total,
     };
 
-    console.log(nueva_compra);
-
     return this.http.post<any>(
       `${this.baseUrlApp}/clientes/compras/`,
       nueva_compra

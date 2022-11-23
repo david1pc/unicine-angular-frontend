@@ -6,14 +6,14 @@
     </div>
     <div class="card-body">
       <p class="card-p">Ingresa tu correo electrónico para buscar tu cuenta.</p>
-      <form class="card-form">
+      <form class="card-form" [formGroup]="miFormulario" (ngSubmit)="guardar()">
         <input
           type="text"
-          name=""
+          formControlName="correo"
           class="input-correo"
           placeholder="Correo electrónico"
         />
-        <button class="card-btn">Confirmar</button>
+        <button class="card-btn" type="submit">Confirmar</button>
       </form>
     </div>
   </div>

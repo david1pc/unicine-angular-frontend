@@ -172,6 +172,10 @@ export interface Funcion {
   compras?: Compra[];
 }
 
+export interface ResultadoCompras {
+  compras: Compra[];
+}
+
 export interface Compra {
   codigo: number;
   medioPago: string;
@@ -180,6 +184,18 @@ export interface Compra {
   entradas: Entrada[];
   compraConfiteria: CompraConfiteria[];
   compraCombo: CompraCombo[];
+  cuponCliente?: CuponCliente;
+  funcion: Funcion;
+}
+
+export interface Compra2 {
+  codigo: number;
+  medioPago: string;
+  fecha_compra: Date;
+  valor_total: number;
+  entradas: Entrada[];
+  compraConfiterias: CompraConfiteria[];
+  compraCombos: CompraCombo[];
   cuponCliente?: CuponCliente;
   funcion: Funcion;
 }
